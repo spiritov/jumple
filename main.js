@@ -13,11 +13,20 @@ const map = mapList[day - 1];
 let guesses = 0;
 const max_guesses = 5;
 let solved = false;
-let input = document.getElementById('input');
-let inputDisplay = document.getElementById('input_display');
-let inputHistory = document.getElementById('input_history');
+const mapHintElement = document.getElementById('map_hint');
+const inputElement = document.getElementById('input');
+const inputDisplayElement = document.getElementById('input_display');
+const inputHistoryElement = document.getElementById('input_history');
 var resultsTracker = ''; //populated by localStorage if it exists
 var resultsHistory = []; //populated by localStorage if it exists
+const hintElements = [
+    document.getElementById("hint_1"),
+    document.getElementById("hint_2"),
+    document.getElementById("hint_3"),
+    document.getElementById("hint_4"),
+    document.getElementById("hint_5"),
+];
+
 
 //set day specific parts of page
 function initializeMap() {
@@ -25,17 +34,17 @@ function initializeMap() {
     document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
     document.getElementById('screenshot').src = 'assets/maps/' + day + '/1.jpg';
 
-    input.addEventListener('keypress', function (pressed) {
+    inputElement.addEventListener('keypress', function (pressed) {
         if (pressed.key === 'Enter' && !solved) {
             pressed.preventDefault();
-            if (input.value.length > 0 && guesses < max_guesses) {
+            if (inputElement.value.length > 0 && guesses < max_guesses) {
                 checkInput();
             }
         }
     });
 
     for (let i = 1; i <= max_guesses; i++) {
-        document.getElementById('hint_' + i).onclick = function () {
+        hintElements[i-1].onclick = function () {
             show(i);
         }
     }
@@ -52,16 +61,16 @@ function show(hint_number) {
         document.getElementById('screenshot').src = 'assets/maps/' + day + '/' + hint_number + '.jpg';
         switch (hint_number) {
             case 3:
-                document.getElementById('map_hint').innerHTML = 'Intended Class: ' + map.intended_class;
+                mapHintElement.innerHTML = 'Intended Class: ' + map.intended_class;
                 break;
             case 4:
-                document.getElementById('map_hint').innerHTML = 'Tier: ' + map.tier;
+                mapHintElement.innerHTML = 'Tier: ' + map.tier;
                 break;
             case 5:
-                document.getElementById('map_hint').innerHTML = 'Author(s): ' + map.author;
+                mapHintElement.innerHTML = 'Author(s): ' + map.author;
                 break;
             default:
-                document.getElementById('map_hint').innerHTML = '';
+                mapHintElement.innerHTML = '';
         }
     }
 }
@@ -70,23 +79,23 @@ function show(hint_number) {
 function checkInput() {
     if (!guesses) //workaround for border appearing while element is empty
     {
-        document.getElementById('input_history').classList.add('border');
+        inputHistoryElement.classList.add('border');
     }
 
 
-    let inputGuess = input.value.toLowerCase();
-    input.value = ''; //input box can be cleared after it's stored
+    let inputGuess = inputElement.value.toLowerCase();
+    inputElement.value = ''; //input box can be cleared after it's stored
     guesses++;
     //if the input is empty, it was skipped
     if (inputGuess.length === 0) {
         resultsHistory.push('skipped');
         localStorage.setItem('day' + day + '_history', JSON.stringify(resultsHistory));
-        inputHistory.innerHTML += 'Guess #' + guesses + ' (skipped)<br>';
+        inputHistoryElement.innerHTML += 'Guess #' + guesses + ' (skipped)<br>';
     }
     else {
         resultsHistory.push(inputGuess);
         localStorage.setItem('day' + day + '_history', JSON.stringify(resultsHistory));
-        inputHistory.innerHTML += 'Guess #' + guesses + ' (' + inputGuess + ')<br>';
+        inputHistoryElement.innerHTML += 'Guess #' + guesses + ' (' + inputGuess + ')<br>';
     }
 
     for (let i = 0; i < 3; i++) {
@@ -100,7 +109,7 @@ function checkInput() {
 //skip button
 function skip() {
     if (guesses < max_guesses && !solved) {
-        input.value = ''; //clear input box to skip
+        inputElement.value = ''; //clear input box to skip
         checkInput();
         if (guesses === max_guesses) {
             end();
@@ -112,7 +121,7 @@ function skip() {
 function checkIfSolved(solved) {
     if (solved) //correct guess, end game
     {
-        document.getElementById('hint_' + guesses).classList.add('correct');
+        hintElements[guesses - 1].classList.add('correct');
         resultsTracker += '1';
         localStorage.setItem('day' + day + '_result', resultsTracker);
         revealAllHints();
@@ -120,7 +129,7 @@ function checkIfSolved(solved) {
     }
     else //incorrect guess
     {
-        document.getElementById('hint_' + guesses).classList.add('incorrect');
+        hintElements[guesses - 1].classList.add('incorrect');
         resultsTracker += '0';
         localStorage.setItem('day' + day + '_result', resultsTracker);
         if (guesses < max_guesses) {
@@ -138,17 +147,17 @@ function checkIfSolved(solved) {
 }
 
 function revealHint(number) {
-    if (document.getElementById('hint_' + number).className.includes('disabled')) //safeguard to not re-disable
+    if (hintElements[number-1].className.includes('disabled')) //safeguard to not re-disable
     {
-        document.getElementById('hint_' + number).classList.toggle('disabled');
+        hintElements[number-1].classList.toggle('disabled');
     }
 }
 
 function revealAllHints() {
-    for (let i = 1; i <= max_guesses; i++) {
-        if (document.getElementById('hint_' + i).className.includes('disabled'))  //safeguard to not re-disable
+    for (let i = 0; i < max_guesses; i++) {
+        if (hintElements[i].className.includes('disabled'))  //safeguard to not re-disable
         {
-            document.getElementById('hint_' + i).classList.toggle('disabled');
+            hintElements[i].classList.toggle('disabled');
         }
     }
 }
@@ -208,18 +217,18 @@ function checkLocalStorage() {
         resultsTracker = localStorage.getItem('day' + day + '_result');
         resultsHistory = JSON.parse(localStorage.getItem('day' + day + '_history'))
 
-        document.getElementById('input_history').classList.add('border');
+        inputHistoryElement.classList.add('border');
         guesses = resultsTracker.length;
 
         for (let i = 0; i < guesses; i++) {
-            inputHistory.innerHTML += 'Guess #' + (i + 1) + ' (' + resultsHistory[i] + ')<br>';
+            inputHistoryElement.innerHTML += 'Guess #' + (i + 1) + ' (' + resultsHistory[i] + ')<br>';
             if (resultsTracker[i] === '1') {
-                document.getElementById('hint_' + (i + 1)).classList.add('correct');
+                hintElements[i].classList.add('correct');
                 solved = true;
             }
             else //0
             {
-                document.getElementById('hint_' + (i + 1)).classList.add('incorrect');
+                hintElements[i].classList.add('incorrect');
                 if (guesses < max_guesses) {
                     revealHint(i + 2);
                 }
