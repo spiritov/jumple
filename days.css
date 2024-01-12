@@ -1,0 +1,188 @@
+* {
+	font-family: "Roboto", "Arial", sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+body {
+	margin: 0;
+	text-align: center;
+	color: black;
+	background-color: slategray;
+}
+
+/* nav bar */
+nav {
+	margin-bottom: 74px;
+	z-index: 2;
+}
+
+nav img {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+	background-color: lightcoral;
+	transition: opacity 0.5s, transform 0s;
+}
+
+nav img:hover {
+	opacity: 0.75;
+	animation-name: shake;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-timing-function: step-end;
+}
+
+nav ul {
+	text-align: left;
+	background-color: lightcoral;
+	padding-left: 8%;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	font-size: 0;
+	border-bottom: 3px solid indianred;
+}
+
+nav li {
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	padding: 7px;
+	background-color: lightcoral;
+
+
+}
+
+#about {
+	width: fit-content;
+	cursor: pointer;
+}
+
+@keyframes shake {
+	0% {
+		transform: rotate(4deg);
+	}
+
+	50% {
+		transform: rotate(-4deg);
+	}
+}
+
+#days_container {
+	margin: auto;
+	display: inline-block;
+}
+
+.day {
+	line-height: 64px;
+	padding-left: 18px;
+	padding-right: 18px;
+	border: 3px solid black;
+	border-radius: 10px;
+	background-color: lavender;
+	margin: 5px;
+
+	transition: opacity 0.5s;
+}
+
+.day:hover {
+	opacity: 1;
+}
+
+.completed {
+	opacity: 0.75;
+}
+
+#modal_container {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 7%;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: black;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+#modal {
+	font-family: "Consolas", monospace;
+	background-color: lavender;
+	margin: auto;
+	border: 3px solid white;
+	border-radius: 10px;
+	width: 40%;
+	opacity: 0.85;
+	padding-right: 5px;
+	line-height: 22px;
+}
+
+#about_text {
+	font-family: "Consolas", monospace;
+	padding: 28px;
+	text-align: left;
+}
+
+#about_top,
+#about_bottom {
+	font-family: "Consolas", monospace;
+	text-align: center;
+}
+
+#about_text a,
+#about_top a {
+	font-family: "Consolas", monospace;
+	font-weight: bold;
+	color: blue;
+}
+
+#close {
+	color: gray;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-right: 10px;
+	user-select: none;
+}
+
+#close:hover {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#tooltip {
+	font-family: "Consolas", monospace;
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+#tooltiptext {
+	font-family: "Consolas", monospace;
+	opacity: 0;
+	width: 120px;
+	background-color: black;
+	color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding: 5px;
+
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+	transition: opacity 0.5s;
+}
+
+#tooltip:hover #tooltiptext {
+	opacity: 1;
+}
