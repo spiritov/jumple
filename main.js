@@ -98,7 +98,7 @@ function checkInput() {
         inputHistoryElement.innerHTML += 'Guess #' + guesses + ' (' + inputGuess + ')<br>';
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < map.name.length; i++) {
         if (inputGuess === map.name[i]) {
             solved = true;
         }
