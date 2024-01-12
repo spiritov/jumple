@@ -217,6 +217,7 @@ nav li {
 
 /* sharing */
 #share_container {
+	display: none;
 	margin: 0;
 	padding: 0;
 	margin-bottom: 10px;
@@ -235,11 +236,13 @@ nav li {
 }
 
 #twitter {
-	background-color: #1DA1F2
+	background-color: #1DA1F2;
+	display: none;
 }
 
 #clipboard {
 	background-color: lavender;
+	display: none;
 }
 
 #modal_container {
