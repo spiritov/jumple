@@ -11,7 +11,7 @@ function setDisplay(day) {
     const container = document.getElementById('days_container');
     const link = document.createElement('a');
     link.id = day + '_link';
-    link.href = day + '.html';
+    link.href = day; //.html not needed
     container.appendChild(link);
 
     const dayDiv = document.createElement('div');
