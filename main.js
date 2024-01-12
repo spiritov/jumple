@@ -172,7 +172,7 @@ function getResultsString(results) {
 
 function shareResults() {
     const resultsString = getResultsString(resultsTracker);
-    document.getElementById('share_container').style.display = ''; //unhide
+    document.getElementById('share_container').style.display = 'block'; //unhide
     const twitter = document.getElementById('twitter');
     const clipboard = document.getElementById('clipboard');
     twitter.innerHTML = 'tweet results';
