@@ -1,7 +1,15 @@
-//create as many day buttons as the current day fom currentDay.js
+//create as many day buttons as 'jumple_day.txt'
 
-function displayDaysList() {
-    for (let i = 1; i <= jumpleDay; i++) {
+fetch('jumple_day_number.txt')
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(text) {
+        displayDaysList(parseInt(text));
+    });
+
+function displayDaysList(days) {
+    for (let i = 1; i <= days; i++) {
         setDisplay(i);
     }
 }

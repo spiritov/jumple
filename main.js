@@ -1,13 +1,4 @@
 var day = 1; //arbitrary default
-if (document.getElementById('index_identifier') === null)
-{
-    day = document.getElementById('day_identifier').classList.value;
-}
-else //index page
-{
-    day = jumpleDay;
-}
-
 //mapList constructor: {name, image_path, intended_class, tier, author, link}
 const map = mapList[day - 1];
 let guesses = 0;
@@ -27,6 +18,24 @@ const hintElements = [
     document.getElementById("hint_5"),
 ];
 
+if (document.getElementById('index_identifier') === null)
+{
+    day = document.getElementById('day_identifier').classList.value;
+    initializeMap();
+    checkLocalStorage();
+}
+else //index page
+{
+    fetch('jumple_day_number.txt?')
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(text) {
+        day = parseInt(text);
+        initializeMap();
+        checkLocalStorage();
+    });
+}
 
 //set day specific parts of page
 function initializeMap() {
@@ -245,7 +254,3 @@ function checkLocalStorage() {
         localStorage.setItem('day' + day + '_history', JSON.stringify(resultsHistory));
     }
 }
-
-//end of functions
-initializeMap();
-checkLocalStorage();
