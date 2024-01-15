@@ -29,6 +29,6 @@ jobs:
           cd ${{ github.workspace }}/jumple          
           git config --global user.name 'Spiritov'
           git config --global user.email 'spiritov@users.noreply.github.com'
-          git add jumple_day_number.txt assets/maps/
+          git add jumple_day_number.txt assets/maps/ *.html
           git commit -m "Deploy new day"
           git push
