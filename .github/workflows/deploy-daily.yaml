@@ -6,12 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: daily-deploy
     steps:
-      - uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.PRIVATE_SSH_KEY }}
+      # - uses: webfactory/ssh-agent@v0.8.0
+      #   with:
+      #     ssh-private-key: ${{ secrets.PRIVATE_SSH_KEY }}
       - uses: actions/checkout@v4
+        with:
+          path: $GITHUB_WORKSPACE/jumple
       - uses: actions/checkout@v4
         with:
           repository: 'spiritov/jumple-assets'
           ref: 'main'
+          ssh-key: ${{ secrets.PRIVATE_SSH_KEY }}
+          path: $GITHUB_WORKSPACE/jumple-assets
       - run: ls .
