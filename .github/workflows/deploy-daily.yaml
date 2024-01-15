@@ -22,8 +22,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - run: ls ${{ github.workspace }}/jumple-assets/assets/maps/2
       - name: Copy new day assets to jumple
         run: python jumple/deploy.py
+      - run: ls ${{ github.workspace }}/jumple/assets/maps/2
       - name: Commit new day assets to jumple
         run: |
           cd ${{ github.workspace }}/jumple
