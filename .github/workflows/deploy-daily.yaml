@@ -7,9 +7,7 @@ jobs:
     environment: daily-deploy
     steps:
       - run: echo ${{ github.repository }}
-      - run: |
-          eval $(ssh-agent -s)
-          ssh-add - <<< ${{ secrets.PRIVATE_SSH_KEY }}
+      - run: ssh-add - <<< ${{ secrets.PRIVATE_SSH_KEY }}
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
