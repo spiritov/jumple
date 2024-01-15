@@ -1,6 +1,6 @@
 var day = 1; //arbitrary default
+var map = mapList[day - 1]; //default
 //mapList constructor: {name, image_path, intended_class, tier, author, link}
-const map = mapList[day - 1];
 let guesses = 0;
 const max_guesses = 5;
 let solved = false;
@@ -21,6 +21,7 @@ const hintElements = [
 if (document.getElementById('index_identifier') === null)
 {
     day = document.getElementById('day_identifier').classList.value;
+    map = mapList[day - 1];
     initializeMap();
     checkLocalStorage();
 }
@@ -32,6 +33,7 @@ else //index page
     })
     .then(function(text) {
         day = parseInt(text);
+        map = mapList[day - 1];
         initializeMap();
         checkLocalStorage();
     });
