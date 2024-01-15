@@ -6,8 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: daily-deploy
     steps:
-      - run: echo ${{ github.repository }}
-      - run: ssh-add - <<< ${{ secrets.PRIVATE_SSH_KEY }}
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_SSH_KEY }}
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
