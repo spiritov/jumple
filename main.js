@@ -1,6 +1,6 @@
 var day = 1; //arbitrary default
-var map = mapList[day - 1]; //default
-//mapList constructor: {name, image_path, intended_class, tier, author, link}
+var map = mapList[rngList[day-1]-1]; //default
+//mapList constructor: {name, intended_class, tier, author, link}
 let guesses = 0;
 const max_guesses = 5;
 let solved = false;
@@ -20,8 +20,8 @@ const hintElements = [
 
 if (document.getElementById('index_identifier') === null)
 {
-    day = document.getElementById('day_identifier').classList.value;
-    map = mapList[day - 1];
+    day = parseInt(document.getElementById('day_identifier').classList.value);
+    map = mapList[rngList[day-1]-1];
     initializeMap();
     checkLocalStorage();
 }
@@ -33,7 +33,7 @@ else //index page
     })
     .then(function(text) {
         day = parseInt(text);
-        map = mapList[day - 1];
+        map = mapList[rngList[day-1]-1];
         initializeMap();
         checkLocalStorage();
     });
@@ -178,6 +178,7 @@ function end() {
     setTimeout(() => //wait for hint button animation to finish
     {
         document.getElementById('map_name').innerHTML = map.name[0];
+        document.getElementById('map_name').classList.add('active');
         document.getElementById('map_link').href = map.link;
         shareResults();
     }, 500);

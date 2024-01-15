@@ -9,7 +9,7 @@ fetch('jumple_day_number.txt')
     });
 
 function displayDaysList(days) {
-    for (let i = 1; i <= days; i++) {
+    for (let i = days; i > 0; i--) {
         setDisplay(i);
     }
 }
@@ -63,7 +63,7 @@ function setDisplay(day) {
         localStorage.setItem('day' + day + '_history', JSON.stringify([]));
         dayDiv.innerHTML += '⬜⬜⬜⬜⬜';
     }
-
+    container.classList.add('active');
 }
 
 displayDaysList();

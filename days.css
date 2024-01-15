@@ -76,6 +76,15 @@ nav li {
 #days_container {
 	margin: auto;
 	display: inline-block;
+	visibility:hidden;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+#days_container.active
+{
+	visibility: visible;
+	opacity: 1;
 }
 
 .day {
@@ -134,6 +143,10 @@ nav li {
 #about_bottom {
 	font-family: "Consolas", monospace;
 	text-align: center;
+}
+
+#about_extra {
+	font-family: "Consolas", monospace
 }
 
 #about_text a,
