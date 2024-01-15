@@ -3,7 +3,7 @@ run-name: Deploy jumple day, daily
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '58 4 * * *'
 jobs:
   deploy-from-assets:
     runs-on: ubuntu-latest
