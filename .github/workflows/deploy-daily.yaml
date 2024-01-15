@@ -1,6 +1,9 @@
 name: deploy-daily
 run-name: Deploy jumple day, daily
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * *'
 jobs:
   deploy-from-assets:
     runs-on: ubuntu-latest
@@ -8,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PAT }}
           path: ${{ github.workspace }}/jumple
       - uses: actions/checkout@v4
         with:
@@ -15,4 +19,14 @@ jobs:
           ref: 'main'
           ssh-key: ${{ secrets.PRIVATE_SSH_KEY }}
           path: ${{ github.workspace }}/jumple-assets
-      - run: ls .
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Copy new day assets to jumple
+        run: python jumple/deploy.py
+      - name: Commit new day assets to jumple
+        run: |
+          git config --global user.name 'Spiritov'
+          git config --global user.email 'spiritov@users.noreply.github.com'
+          git commit -am "Deploy new day"
+          git push
