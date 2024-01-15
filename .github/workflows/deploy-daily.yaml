@@ -26,6 +26,7 @@ jobs:
         run: python jumple/deploy.py
       - name: Commit new day assets to jumple
         run: |
+          cd ${{ github.workspace }}/jumple
           git config --global user.name 'Spiritov'
           git config --global user.email 'spiritov@users.noreply.github.com'
           git commit -am "Deploy new day"
