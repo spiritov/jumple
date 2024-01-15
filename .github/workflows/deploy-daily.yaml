@@ -1,11 +1,6 @@
 name: deploy-daily
 run-name: Deploy jumple day, daily
-on:
-  workflow_run:
-    workflows: ["Build"]
-    types: [requested]
-    branches:
-      - 'main'
+on: workflow_dispatch
 jobs:
   deploy-from-assets:
     runs-on: ubuntu-latest
