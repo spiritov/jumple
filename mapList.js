@@ -619,8 +619,8 @@ const mapList = [
     new Map(['jump_spaghetti_v2', 'jump_spaghetti', 'spaghetti'], 'Soldier', 3, 'sitood', 'https://tempus2.xyz/maps/jump_spaghetti_v2'),
     new Map(['jump_spark_rc2','jump_spark','spark'], '', '', '', 'https://tempus2.xyz/maps/jump_spark_rc2'),
     new Map(['jump_spectre','spectre'], '', '', '', 'https://tempus2.xyz/maps/jump_spectre'),
-    new Map(['jump_speed','speed'], '', '', '', 'https://tempus2.xyz/maps/jump_speed'),
     new Map(['jump_speed','speed'], 'Demo', '3', 'Aznbob', 'https://tempus2.xyz/maps/jump_speed'),
+    new Map(['jump_speed','speed2'], '', '', '', 'https://tempus2.xyz/maps/jump_speed2'),
     new Map(['jump_squared_b2','jump_squared','squared'], '', '', '', 'https://tempus2.xyz/maps/jump_squared_b2'),
     new Map(['jump_starkie_tpn','jump_starkie','starkie'], '', '', '', 'https://tempus2.xyz/maps/jump_starkie_tpn'),
     new Map(['jump_start_b4','jump_start','start'], '', '', '', 'https://tempus2.xyz/maps/jump_start_b4'),
@@ -753,5 +753,5 @@ const mapList = [
     new Map(['rj_rckteer_adv_v2','rj_rckteer','rckteer'], '', '', '', 'https://tempus2.xyz/maps/rj_rckteer_adv_v2'),
     new Map(['rj_training_v3','rj_training','training'], '', '', '', 'https://tempus2.xyz/maps/rj_training_v3'),
     new Map(['sj_naissancee_tf2','sj_naissancee','naissancee'], '', '', '', 'https://tempus2.xyz/maps/sj_naissancee_tf2'),
-    new Map(['sj_providence_tf','sj_providence','providence'], '', '', '', 'https://tempus2.xyz/maps/sj_providence_tf')
-];
+    new Map(['sj_providence_tf','sj_providence','providence'], '', '', '', 'https://tempus2.xyz/maps/sj_providence_tf'),
+]
