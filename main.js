@@ -180,6 +180,7 @@ function end() {
         document.getElementById('map_name').innerHTML = map.name[0];
         document.getElementById('map_name').classList.add('active');
         document.getElementById('map_link').href = map.link;
+        document.getElementById('skip').classList.add('disabled');
         shareResults();
     }, 500);
 }
