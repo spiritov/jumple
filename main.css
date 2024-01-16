@@ -124,6 +124,9 @@ nav li {
 	transition: transform 1s, background-color 0.5s 0.25s, opacity 0.5s 0.5s;
 }
 
+#hints li:hover {
+	cursor: pointer;
+}
 #hints li.correct {
 	background-color: #6AAA64;
 	transform: rotateY(180deg);
