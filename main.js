@@ -1,4 +1,5 @@
 var day = 1; //arbitrary default
+var currentDay = 1; //default
 var map = mapList[rngList[day-1]-1]; //default
 //mapList constructor: {name, intended_class, tier, author, link}
 let guesses = 0;
@@ -18,12 +19,26 @@ const hintElements = [
     document.getElementById("hint_5"),
 ];
 
-if (document.getElementById('index_identifier') === null)
+if (document.getElementById('index_identifier') === null) //must be day page
 {
-    day = parseInt(document.getElementById('day_identifier').classList.value);
-    map = mapList[rngList[day-1]-1];
-    initializeMap();
-    checkLocalStorage();
+    fetch('jumple_day_number.txt?')
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (text) {
+            currentDay = parseInt(text);
+            const url = window.location.href;
+            day = parseInt((url.charAt(url.lastIndexOf('/') + 1))); //get day # from url
+            if (day < currentDay) {
+                initializeMap();
+                checkLocalStorage();
+            }
+            else //invalid response
+            {
+                mapHintElement.innerHTML = 'this day is not available yet!';
+                document.getElementById('screenshot').src = 'assets/site/no_day.jpg';
+            }
+        });
 }
 else //index page
 {
@@ -32,8 +47,8 @@ else //index page
         return response.text();
     })
     .then(function(text) {
-        day = parseInt(text);
-        map = mapList[rngList[day-1]-1];
+        currentDay = parseInt(text);
+        map = mapList[rngList[currentDay-1]-1];
         initializeMap();
         checkLocalStorage();
     });
