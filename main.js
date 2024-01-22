@@ -29,7 +29,7 @@ if (document.getElementById('index_identifier') === null) //must be day page
             currentDay = parseInt(text);
             const url = window.location.href;
             day = parseInt((url.charAt(url.lastIndexOf('/') + 1))); //get day # from url
-            if (day < currentDay) {
+            if (day <= currentDay) {
                 initializeMap();
                 checkLocalStorage();
             }
