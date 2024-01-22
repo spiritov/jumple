@@ -8,13 +8,6 @@ def main():
         f.seek(0)
         f.write(str(day_num))
 
-    day_file_name = f"jumple-assets/{day_num}.html"
-    next_day_path = Path(day_file_name)
-    if not next_day_path.is_file():
-        print(f"No new day file at '{day_file_name}' for day {day_num}")
-        exit(1)
-        return
-
     day_image_dir = Path(f"jumple-assets/assets/maps/{day_num}")
     if not day_image_dir.is_dir():
         print(f"No new asset folder at '{day_image_dir}' for day '{day_num}'")
@@ -27,10 +20,6 @@ def main():
             print(f"Missing image expected at '{day_image_path}' for day '{day_num}'")
             exit(1)
             return
-
-    target_day_file_dir = f"jumple/{day_num}.html"
-    print(f"Copying file from '{day_file_name}' to {target_day_file_dir}.")
-    copy(day_file_name, target_day_file_dir)
 
     target_image_dir = f"jumple/assets/maps/{day_num}/"
     print(f"Copying directory from '{day_image_dir}' to '{target_image_dir}'")
