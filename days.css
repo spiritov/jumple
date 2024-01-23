@@ -195,8 +195,11 @@ nav li {
 	left: 50%;
 	margin-left: -60px;
 	transition: opacity 0.5s;
+	visibility: hidden;
+
 }
 
 #tooltip:hover #tooltiptext {
+	visibility: visible;
 	opacity: 1;
 }
