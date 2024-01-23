@@ -30,7 +30,7 @@ if (document.getElementById('index_identifier') === null) //must be day page
             const url = window.location.href;
             day = parseInt((url.substring(url.lastIndexOf('/') + 1,url.length))); //get day # from url
             map = mapList[rngList[day-1]-1];
-            if (day <= currentDay) {
+            if (day <= currentDay && day > 0) {
                 initializeMap();
                 checkLocalStorage();
             }
