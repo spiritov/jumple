@@ -111,6 +111,8 @@ function checkInput() {
 
 
     let inputGuess = inputElement.value.toLowerCase();
+    inputGuess = inputGuess.replace(/\s/g, '');
+
     inputElement.value = ''; //input box can be cleared after it's stored
     guesses++;
     //if the input is empty, it was skipped
