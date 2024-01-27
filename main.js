@@ -125,10 +125,13 @@ inputElement.addEventListener('keyup', function (pressed) {
         skip();
     }
 
-    window.onclick = function (event) { //for autocomplete unfocus
+    window.onclick = function (event) { //for autocomplete unfocus, takes priority over about.js
         if (event.target != autocompleteElement)
         {
         autocompleteElement.style.visibility = 'hidden';
+            if (event.target === modal_container) { //TODO: fix this..
+                modal_container.style.display = 'none';
+            }
         }
     }
 }
