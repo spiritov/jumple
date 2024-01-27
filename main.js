@@ -225,6 +225,7 @@ function matchToAutocomplete()
 
     autocompleteElement.style.border = '2px solid darkgray'; //TODO: workaround, maybe
     autocompleteElement.style.borderRight = 'none';
+    autocompleteElement.style.borderBottom = 'none';
 
     return autoCompleteList.filter(function(term) {
         if(term.match(reg))
