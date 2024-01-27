@@ -187,28 +187,29 @@ function checkInput() {
 
 function displayAutocomplete()
 {
-    autocompleteElement.style.visibility = 'visible';
-    autocompleteElement.innerHTML = '';
-    let autocompleteList = '';
-    autocompleteTerms = matchToAutocomplete(inputElement.value);
+    
+        autocompleteElement.style.visibility = 'visible';
+        autocompleteElement.innerHTML = '';
+        let autocompleteList = '';
+        if (inputElement.value.length > 1) { //too many operations with just 1 letter
+        autocompleteTerms = matchToAutocomplete(inputElement.value);
 
-    for(let i = 0; i < autocompleteTerms.length; i++)
-    {
-        autocompleteList += '<li id="li'+i+'">' + autocompleteTerms[i] + '</li>'; //<id="li1"
-    }
-
-    autocompleteElement.innerHTML = '<ul>' + autocompleteList + '</ul>';
-    if(autocompleteTerms.length > 0)
-    {
-        setActiveAutocompleteElement(0);
         for (let i = 0; i < autocompleteTerms.length; i++) {
-            document.getElementById('li' + i).addEventListener('mouseover', function () {
-                setActiveAutocompleteElement(i);
-            });
-            document.getElementById('li' + i).addEventListener('click', function () {
-                fillAutocompleteWithActiveTerm();
-                
-            });
+            autocompleteList += '<li id="li' + i + '">' + autocompleteTerms[i] + '</li>'; //<id="li1"
+        }
+
+        autocompleteElement.innerHTML = '<ul>' + autocompleteList + '</ul>';
+        if (autocompleteTerms.length > 0) {
+            setActiveAutocompleteElement(0);
+            for (let i = 0; i < autocompleteTerms.length; i++) {
+                document.getElementById('li' + i).addEventListener('mouseover', function () {
+                    setActiveAutocompleteElement(i);
+                });
+                document.getElementById('li' + i).addEventListener('click', function () {
+                    fillAutocompleteWithActiveTerm();
+
+                });
+            }
         }
     }
 }
