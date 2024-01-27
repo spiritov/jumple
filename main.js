@@ -7,8 +7,11 @@ const max_guesses = 5;
 let solved = false;
 const mapHintElement = document.getElementById('map_hint');
 const inputElement = document.getElementById('input');
-const inputDisplayElement = document.getElementById('input_display');
 const inputHistoryElement = document.getElementById('input_history');
+const autocompleteElement = document.getElementById('autocomplete');
+var activeAutocompleteTermID = 0;
+var activeAutocompleteTermElement = document.getElementById('autocomplete'); //placeholder
+var autocompleteTerms = [];
 var resultsTracker = ''; //populated by localStorage if it exists
 var resultsHistory = []; //populated by localStorage if it exists
 const hintElements = [
@@ -61,6 +64,48 @@ function initializeMap() {
     document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
     document.getElementById('screenshot').src = 'assets/maps/' + day + '/1.jpg';
 
+inputElement.addEventListener('keydown', function (pressed) { //active element tracking
+    if(autocompleteTerms.length > 0)
+    {
+        if(pressed.key === 'Tab')
+        {
+            pressed.preventDefault();
+            fillAutocompleteWithActiveTerm();
+        }
+        else if(pressed.key === 'ArrowUp')
+        {
+            pressed.preventDefault();
+            if(activeAutocompleteTermID > 0)
+            {
+                setActiveAutocompleteElement(activeAutocompleteTermID - 1);
+                activeAutocompleteTermElement.scrollIntoView();
+            }
+        }
+        else if(pressed.key === 'ArrowDown')
+        {
+            pressed.preventDefault();
+            if(activeAutocompleteTermID < autocompleteTerms.length - 1)
+            {
+                setActiveAutocompleteElement(activeAutocompleteTermID + 1);
+                activeAutocompleteTermElement.scrollIntoView();
+            }
+        }
+        
+    }
+});
+
+inputElement.addEventListener('keyup', function (pressed) {
+    if(autocompleteTerms.length > 0)
+    {
+        pressed.preventDefault();
+    }
+    if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown') 
+    {
+        displayAutocomplete();
+    }
+});
+
+
     inputElement.addEventListener('keypress', function (pressed) {
         if (pressed.key === 'Enter' && !solved) {
             pressed.preventDefault();
@@ -80,6 +125,12 @@ function initializeMap() {
         skip();
     }
 
+    window.onclick = function (event) { //for autocomplete unfocus
+        if (event.target != autocompleteElement)
+        {
+        autocompleteElement.style.visibility = 'hidden';
+        }
+    }
 }
 
 //set image and text hint
@@ -110,8 +161,7 @@ function checkInput() {
     }
 
 
-    let inputGuess = inputElement.value.toLowerCase();
-    inputGuess = inputGuess.replace(/\s/g, '');
+    let inputGuess = formatInput(inputElement.value);
 
     inputElement.value = ''; //input box can be cleared after it's stored
     guesses++;
@@ -135,6 +185,74 @@ function checkInput() {
     checkIfSolved(solved);
 }
 
+function displayAutocomplete()
+{
+    autocompleteElement.style.visibility = 'visible';
+    autocompleteElement.innerHTML = '';
+    let autocompleteList = '';
+    autocompleteTerms = matchToAutocomplete(inputElement.value);
+
+    for(let i = 0; i < autocompleteTerms.length; i++)
+    {
+        autocompleteList += '<li id="li'+i+'">' + autocompleteTerms[i] + '</li>'; //<id="li1"
+    }
+
+    autocompleteElement.innerHTML = '<ul>' + autocompleteList + '</ul>';
+    if(autocompleteTerms.length > 0)
+    {
+        setActiveAutocompleteElement(0);
+        for (let i = 0; i < autocompleteTerms.length; i++) {
+            document.getElementById('li' + i).addEventListener('mouseover', function () {
+                setActiveAutocompleteElement(i);
+            });
+            document.getElementById('li' + i).addEventListener('click', function () {
+                fillAutocompleteWithActiveTerm();
+                
+            });
+        }
+    }
+}
+function matchToAutocomplete()
+{
+    if(inputElement.value.length === 0)
+    {
+        autocompleteElement.style.border = 'none';
+        return [];
+    }
+
+    let reg = new RegExp(inputElement.value);
+
+    autocompleteElement.style.border = '2px solid darkgray'; //TODO: workaround, maybe
+    autocompleteElement.style.borderRight = 'none';
+
+    return autoCompleteList.filter(function(term) {
+        if(term.match(reg))
+        {
+            return term;
+        }
+    });
+}
+
+function setActiveAutocompleteElement(id)
+{
+    if(activeAutocompleteTermElement.classList.contains('active')) //remove current if it exists
+    {
+        activeAutocompleteTermElement.classList.remove('active');
+    }
+    activeAutocompleteTermElement = document.getElementById('li' + id);
+    activeAutocompleteTermElement.classList.add('active'); //add new
+    activeAutocompleteTermID = id;
+}
+
+function fillAutocompleteWithActiveTerm()
+{
+    inputElement.value = activeAutocompleteTermElement.innerHTML;
+    activeAutocompleteTermElement.classList.remove('active');
+    autocompleteTerms = [];
+    autocompleteElement.innerHTML = '';
+    autocompleteElement.style.border = 'none';
+    inputElement.focus();
+}
 //skip button
 function skip() {
     if (guesses < max_guesses && !solved) {
@@ -144,6 +262,13 @@ function skip() {
             end();
         }
     }
+}
+
+function formatInput(guess)
+{
+    guess = guess.toLowerCase();
+    guess = guess.replace(/\s/g, '');
+    return guess;
 }
 
 //end game if solved, revealHint() otherwise
@@ -276,3 +401,5 @@ function checkLocalStorage() {
         localStorage.setItem('day' + day + '_history', JSON.stringify(resultsHistory));
     }
 }
+
+

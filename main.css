@@ -165,8 +165,9 @@ nav li {
 
 /* input */
 #input {
+	position: relative;
 	background-color: white;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	font-size: 16px;
 	font-family: "Consolas", "Monaco", monospace;
 	text-align: center;
@@ -174,25 +175,73 @@ nav li {
 	border-width: 0px;
 	width: 350px;
 	padding: 8px;
+	z-index: 3;
 }
 
 #input:focus {
 	outline: 3px solid black;
-}
-
-#input_history {
-	font-family: "Consolas", monospace;
-	margin-top: 10px;
-	text-align: center;
-	margin: auto;
-	width: fit-content;
-	background-color: gray;
+	z-index: 3;
 }
 
 #input[type=text]
 {
 	background-color: whitesmoke;
 }
+
+#autocomplete {
+	width: 360px;
+	position: absolute;
+	margin: auto;
+	margin-top: 0px;
+	left: 0;
+	right: 0;
+	user-select: none;
+	z-index: 2;
+	border: none;
+	cursor: pointer;
+}
+
+#autocomplete ::-webkit-scrollbar {
+	width: 11px;
+	background: black;
+}
+
+#autocomplete ::-webkit-scrollbar-track {
+	background:darkgray;
+}
+
+#autocomplete ::-webkit-scrollbar-thumb {
+	background: #888;
+  }
+#autocomplete ul {
+	list-style-type:none;
+	padding: 0px;
+	margin: 0px;
+	background-color: gray;
+	max-height: 155px;
+	overflow-y: scroll;
+}
+
+#autocomplete li {
+	font-family: "Consolas", "Monaco", monospace;
+	padding: 5px;
+	border-bottom: 2px dashed darkgray;
+}
+
+#autocomplete li.active {
+	background-color: lavender;
+}
+
+#input_history {
+	font-family: "Consolas", monospace;
+	text-align: center;
+	margin: auto;
+	margin-top: 10px;
+	width: fit-content;
+	background-color: gray;
+}
+
+
 
 #input_history.border {
 	border: 2px solid darkgray;
@@ -240,6 +289,7 @@ nav li {
 }
 
 #share_container li {
+	margin-top: 10px;
 	display: inline-block;
 	width: 128px;
 	height: 32px;
@@ -263,7 +313,7 @@ nav li {
 #modal_container {
 	display: none;
 	position: fixed;
-	z-index: 1;
+	z-index: 4;
 	padding-top: 7%;
 	left: 0;
 	top: 0;
