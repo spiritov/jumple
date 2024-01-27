@@ -198,7 +198,6 @@ nav li {
 	user-select: none;
 	z-index: 2;
 	border: none;
-	cursor: pointer;
 }
 
 #autocomplete ::-webkit-scrollbar {
