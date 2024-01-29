@@ -115,6 +115,7 @@ inputElement.addEventListener('keyup', function (pressed) {
             if (inputElement.value.length > 0 && guesses < max_guesses) {
                 checkInput();
             }
+            displayAutocomplete();
         }
     });
 
