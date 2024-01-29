@@ -106,6 +106,10 @@ inputElement.addEventListener('keyup', function (pressed) {
     {
         displayAutocomplete();
     }
+    if(pressed.key === 'Backspace' && inputElement.value.length < 2)
+    {
+        autocompleteElement.style.visibility = 'hidden';
+    }
 });
 
 
