@@ -10,6 +10,7 @@ a {
 
 body {
 	margin: 0;
+	margin-bottom: 125px;
 	text-align: center;
 	color: black;
 	background-color: slategray;
@@ -171,6 +172,7 @@ nav li {
 	font-size: 16px;
 	font-family: "Consolas", "Monaco", monospace;
 	text-align: center;
+	line-height: 125%;
 	border-radius: 3px;
 	border-width: 0px;
 	width: 350px;
