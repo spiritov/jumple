@@ -188,7 +188,7 @@ nav li {
 	background-color: whitesmoke;
 }
 
-#autocomplete {
+#autofill {
 	width: 360px;
 	position: absolute;
 	margin: auto;
@@ -200,20 +200,26 @@ nav li {
 	border: none;
 }
 
-#autocomplete ::-webkit-scrollbar {
+#autofill.active {
+	border: 2px solid darkgray;
+    border-right: none;
+    border-bottom: none;
+}
+
+#autofill ::-webkit-scrollbar {
 	width: 11px;
 	background: black;
 }
 
-#autocomplete ::-webkit-scrollbar-track {
+#autofill ::-webkit-scrollbar-track {
 	background:darkgray;
 }
 
-#autocomplete ::-webkit-scrollbar-thumb {
+#autofill ::-webkit-scrollbar-thumb {
 	background: gray;
 }
 
-#autocomplete ul {
+#autofill ul {
 	list-style-type:none;
 	padding: 0px;
 	margin: 0px;
@@ -222,13 +228,13 @@ nav li {
 	overflow-y: scroll;
 }
 
-#autocomplete li {
+#autofill li {
 	font-family: "Consolas", "Monaco", monospace;
 	padding: 5px;
 	border-bottom: 2px dashed darkgray;
 }
 
-#autocomplete li.active {
+#autofill li.active {
 	background-color: lavender;
 	font-weight: bold;
 }

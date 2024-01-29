@@ -9,11 +9,10 @@ const screenshotElement = document.getElementById('screenshot');
 const mapHintElement = document.getElementById('map_hint');
 const inputElement = document.getElementById('input');
 const inputHistoryElement = document.getElementById('input_history');
-const autocompleteElement = document.getElementById('autocomplete');
-var enableAutofill = false;
-var activeAutocompleteTermID = 0;
-var activeAutocompleteTermElement = document.getElementById('autocomplete'); //placeholder
-var autocompleteTerms = [];
+const autofillElement = document.getElementById('autofill');
+var activeAutofillListID = 0;
+var activeAutofillListElement = document.getElementById('autofill'); //placeholder
+var autofillTerms = [];
 var resultsTracker = ''; //populated by localStorage if it exists
 var resultsHistory = []; //populated by localStorage if it exists
 const hintElements = [
@@ -38,7 +37,7 @@ if (document.getElementById('index_identifier') === null) //must be day page
             if (day <= currentDay && day > 0) {
                 initializeMap();
                 checkLocalStorage();
-                enableAutofill = true;
+                //enableAutofill = true;
             }
             else //invalid response
             {
@@ -58,7 +57,7 @@ else //index page
         map = mapList[rngList[day-1]-1];
         initializeMap();
         checkLocalStorage();
-        enableAutofill = true;
+        //enableAutofill = true;
     });
 }
 
@@ -68,29 +67,29 @@ function initializeMap() {
     screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
 
 inputElement.addEventListener('keydown', function (pressed) { //active element tracking
-    if(autocompleteTerms.length > 0)
+    if(autofillTerms.length > 0)
     {
         if(pressed.key === 'Tab')
         {
             pressed.preventDefault();
-            fillAutocompleteWithActiveTerm();
+            fillAutofillWithActiveTerm();
         }
         else if(pressed.key === 'ArrowUp')
         {
             pressed.preventDefault();
-            if(activeAutocompleteTermID > 0)
+            if(activeAutofillListID > 0)
             {
-                setActiveAutocompleteElement(activeAutocompleteTermID - 1);
-                activeAutocompleteTermElement.scrollIntoView();
+                setActiveAutofillElement(activeAutofillListID - 1);
+                activeAutofillListElement.scrollIntoView();
             }
         }
         else if(pressed.key === 'ArrowDown')
         {
             pressed.preventDefault();
-            if(activeAutocompleteTermID < autocompleteTerms.length - 1)
+            if(activeAutofillListID < autofillTerms.length - 1)
             {
-                setActiveAutocompleteElement(activeAutocompleteTermID + 1);
-                activeAutocompleteTermElement.scrollIntoView();
+                setActiveAutofillElement(activeAutofillListID + 1);
+                activeAutofillListElement.scrollIntoView();
             }
         }
         
@@ -98,17 +97,17 @@ inputElement.addEventListener('keydown', function (pressed) { //active element t
 });
 
 inputElement.addEventListener('keyup', function (pressed) {
-    if(autocompleteTerms.length > 0)
+    if(autofillTerms.length > 0)
     {
         pressed.preventDefault();
     }
     if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown' && inputElement.value.length > 1) 
     {
-        displayAutocomplete();
+        displayAutofill();
     }
     if(pressed.key === 'Backspace' && inputElement.value.length < 2)
     {
-        autocompleteElement.style.visibility = 'hidden';
+        setAutofillActive(false);
     }
 });
 
@@ -119,7 +118,15 @@ inputElement.addEventListener('keyup', function (pressed) {
             if (inputElement.value.length > 0 && guesses < max_guesses) {
                 checkInput();
             }
-            displayAutocomplete();
+            displayAutofill();
+        }
+    });
+
+    inputElement.addEventListener('click', function()
+    {
+        if(inputElement.value.length > 1)
+        {
+            displayAutofill();
         }
     });
 
@@ -135,9 +142,9 @@ inputElement.addEventListener('keyup', function (pressed) {
 
     window.addEventListener('click', function(onClick)
     {
-        if(onClick.target != autocompleteElement)
+        if(onClick.target != autofillElement && onClick.target != inputElement)
         {
-            autocompleteElement.style.visibility = 'hidden';
+            setAutofillActive(false);
         }
     });
 }
@@ -164,7 +171,7 @@ function show(hint_number) {
 
 //check input against solutions
 function checkInput() {
-    if (!guesses) //workaround for border appearing while element is empty
+    if (!guesses) 
     {
         inputHistoryElement.classList.add('border');
     }
@@ -194,47 +201,48 @@ function checkInput() {
     checkIfSolved(solved);
 }
 
-function displayAutocomplete()
+function displayAutofill()
 {
-    
-        autocompleteElement.style.visibility = 'visible';
-        autocompleteElement.innerHTML = '';
-        let autocompleteList = '';
-        autocompleteTerms = matchToAutocomplete(inputElement.value);
+    setAutofillActive(true);     
+    autofillElement.innerHTML = '';
+        let autofillList = '';
+        autofillTerms = matchToAutofill(inputElement.value);
+        const ul = document.createElement('ul');
+        autofillElement.appendChild(ul);
 
-        for (let i = 0; i < autocompleteTerms.length; i++) {
-            autocompleteList += '<li id="li' + i + '">' + autocompleteTerms[i] + '</li>'; //<id="li1"
+        for (let i = 0; i < autofillTerms.length; i++) {
+            const li = document.createElement('li');
+            li.id = 'li' + i;
+            li.innerHTML = autofillTerms[i];
+            ul.appendChild(li);
         }
 
-        autocompleteElement.innerHTML = '<ul>' + autocompleteList + '</ul>';
-        if (autocompleteTerms.length > 0) {
-            setActiveAutocompleteElement(0);
-            for (let i = 0; i < autocompleteTerms.length; i++) {
+        if (autofillTerms.length > 0) {
+            setActiveAutofillElement(0);
+            for (let i = 0; i < autofillTerms.length; i++) {
                 document.getElementById('li' + i).addEventListener('mouseover', function () {
-                    setActiveAutocompleteElement(i);
+                    setActiveAutofillElement(i);
                 });
                 document.getElementById('li' + i).addEventListener('click', function () {
-                    fillAutocompleteWithActiveTerm();
+                    fillAutofillWithActiveTerm();
 
                 });
             }
         }
 }
-function matchToAutocomplete()
+function matchToAutofill()
 {
-    if(inputElement.value.length === 0)
+    if(inputElement.value.length < 2) 
     {
-        autocompleteElement.style.border = 'none';
+        setAutofillActive(false);
         return [];
     }
 
     let reg = new RegExp(inputElement.value);
 
-    autocompleteElement.style.border = '2px solid darkgray'; //TODO: workaround, maybe
-    autocompleteElement.style.borderRight = 'none';
-    autocompleteElement.style.borderBottom = 'none';
+    autofillElement.classList.add('active');
 
-    return autocompleteList.filter(function(term) {
+    return autofillMapList.filter(function(term) {
         if(term.match(reg))
         {
             return term;
@@ -242,26 +250,42 @@ function matchToAutocomplete()
     });
 }
 
-function setActiveAutocompleteElement(id)
+function setActiveAutofillElement(id)
 {
-    if(activeAutocompleteTermElement.classList.contains('active')) //remove current if it exists
+    if(activeAutofillListElement.classList.contains('active')) //remove current if it exists
     {
-        activeAutocompleteTermElement.classList.remove('active');
+        activeAutofillListElement.classList.remove('active');
     }
-    activeAutocompleteTermElement = document.getElementById('li' + id);
-    activeAutocompleteTermElement.classList.add('active'); //add new
-    activeAutocompleteTermID = id;
+    activeAutofillListID = id;
+    activeAutofillListElement = document.getElementById('li' + id);
+    activeAutofillListElement.classList.add('active'); //add new
 }
 
-function fillAutocompleteWithActiveTerm()
+function fillAutofillWithActiveTerm()
 {
-    inputElement.value = activeAutocompleteTermElement.innerHTML;
-    activeAutocompleteTermElement.classList.remove('active');
-    autocompleteTerms = [];
-    autocompleteElement.innerHTML = '';
-    autocompleteElement.style.border = 'none';
+    inputElement.value = activeAutofillListElement.innerHTML;
+    setAutofillActive(false);
     inputElement.focus();
 }
+
+function setAutofillActive(bool)
+{
+    if(bool && !autofillElement.classList.contains('active'))
+    {
+        autofillElement.classList.add('active');
+    }
+    else if(!bool && autofillElement.classList.contains('active'))
+    {
+        autofillElement.classList.remove('active');
+        if(activeAutofillListElement.classList.contains('active'))
+        {
+            activeAutofillListElement.classList.remove('active');
+            autofillTerms = [];
+            autofillElement.innerHTML = '';
+        }
+    }
+}
+
 //skip button
 function skip() {
     if (guesses < max_guesses && !solved) {
