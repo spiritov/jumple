@@ -10,13 +10,16 @@ about_extraElement.innerHTML =
 
 'New maps are updated every day at 12:00AM ET (UTC -5).';
 
-about.onclick = function () {
+about.addEventListener('click', function() {
     modal_container.style.display = 'block';
-}
-close.onclick = function () {
+});
+
+close.addEventListener('click', function() {
     modal_container.style.display = 'none';
-}
-window.onclick = function (event) {
-    if (event.target == modal_container)
+});
+modal_container.addEventListener('click', function (onClick) {
+    if (onClick.target === modal_container) 
+    {
         modal_container.style.display = 'none';
-}
+    }
+});

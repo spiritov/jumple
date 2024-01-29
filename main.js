@@ -5,10 +5,12 @@ var map = mapList[rngList[day-1]-1]; //default
 let guesses = 0;
 const max_guesses = 5;
 let solved = false;
+const screenshotElement = document.getElementById('screenshot');
 const mapHintElement = document.getElementById('map_hint');
 const inputElement = document.getElementById('input');
 const inputHistoryElement = document.getElementById('input_history');
 const autocompleteElement = document.getElementById('autocomplete');
+var enableAutofill = false;
 var activeAutocompleteTermID = 0;
 var activeAutocompleteTermElement = document.getElementById('autocomplete'); //placeholder
 var autocompleteTerms = [];
@@ -36,11 +38,12 @@ if (document.getElementById('index_identifier') === null) //must be day page
             if (day <= currentDay && day > 0) {
                 initializeMap();
                 checkLocalStorage();
+                enableAutofill = true;
             }
             else //invalid response
             {
                 mapHintElement.innerHTML = 'this day is not available yet!';
-                document.getElementById('screenshot').src = 'assets/site/no_day.jpg';
+                screenshotElement.src = 'assets/site/no_day.jpg';
             }
         });
 }
@@ -55,14 +58,14 @@ else //index page
         map = mapList[rngList[day-1]-1];
         initializeMap();
         checkLocalStorage();
+        enableAutofill = true;
     });
 }
 
 //set day specific parts of page
 function initializeMap() {
-    document.getElementById('share_container').style.display = 'none';
     document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
-    document.getElementById('screenshot').src = 'assets/maps/' + day + '/1.jpg';
+    screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
 
 inputElement.addEventListener('keydown', function (pressed) { //active element tracking
     if(autocompleteTerms.length > 0)
@@ -99,7 +102,7 @@ inputElement.addEventListener('keyup', function (pressed) {
     {
         pressed.preventDefault();
     }
-    if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown') 
+    if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown' && inputElement.value.length > 1) 
     {
         displayAutocomplete();
     }
@@ -125,21 +128,19 @@ inputElement.addEventListener('keyup', function (pressed) {
         skip();
     }
 
-    window.onclick = function (event) { //for autocomplete unfocus, takes priority over about.js
-        if (event.target != autocompleteElement)
+    window.addEventListener('click', function(onClick)
+    {
+        if(onClick.target != autocompleteElement)
         {
-        autocompleteElement.style.visibility = 'hidden';
-            if (event.target === modal_container) { //TODO: fix this..
-                modal_container.style.display = 'none';
-            }
+            autocompleteElement.style.visibility = 'hidden';
         }
-    }
+    });
 }
 
 //set image and text hint
 function show(hint_number) {
     if (hint_number <= max_guesses) { //don't try to show a hint that doesn't exist
-        document.getElementById('screenshot').src = 'assets/maps/' + day + '/' + hint_number + '.jpg';
+        screenshotElement.src = 'assets/maps/' + day + '/' + hint_number + '.jpg';
         switch (hint_number) {
             case 3:
                 mapHintElement.innerHTML = 'Intended Class: ' + map.intended_class;
@@ -194,7 +195,6 @@ function displayAutocomplete()
         autocompleteElement.style.visibility = 'visible';
         autocompleteElement.innerHTML = '';
         let autocompleteList = '';
-        if (inputElement.value.length > 1) { //too many operations with just 1 letter
         autocompleteTerms = matchToAutocomplete(inputElement.value);
 
         for (let i = 0; i < autocompleteTerms.length; i++) {
@@ -214,7 +214,6 @@ function displayAutocomplete()
                 });
             }
         }
-    }
 }
 function matchToAutocomplete()
 {
@@ -230,7 +229,7 @@ function matchToAutocomplete()
     autocompleteElement.style.borderRight = 'none';
     autocompleteElement.style.borderBottom = 'none';
 
-    return autoCompleteList.filter(function(term) {
+    return autocompleteList.filter(function(term) {
         if(term.match(reg))
         {
             return term;

@@ -210,8 +210,9 @@ nav li {
 }
 
 #autocomplete ::-webkit-scrollbar-thumb {
-	background: #888;
-  }
+	background: gray;
+}
+
 #autocomplete ul {
 	list-style-type:none;
 	padding: 0px;
@@ -229,6 +230,7 @@ nav li {
 
 #autocomplete li.active {
 	background-color: lavender;
+	font-weight: bold;
 }
 
 #input_history {
