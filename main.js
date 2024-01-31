@@ -66,7 +66,6 @@ else //index page
 function initializeMap() {
     document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
     screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
-    screenshotElement.style.display = 'block';
 
     inputElement.addEventListener('keypress', function (pressed) {
         if (pressed.key === 'Enter' && !solved) {
