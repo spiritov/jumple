@@ -8,6 +8,7 @@ let solved = false;
 const screenshotElement = document.getElementById('screenshot');
 const mapHintElement = document.getElementById('map_hint');
 const inputElement = document.getElementById('input');
+const submitButtonElement = document.getElementById('submit_button');
 const inputHistoryElement = document.getElementById('input_history');
 var resultsTracker = ''; //populated by localStorage if it exists
 var resultsHistory = []; //populated by localStorage if it exists
@@ -18,6 +19,10 @@ const hintElements = [
     document.getElementById("hint_4"),
     document.getElementById("hint_5"),
 ];
+const autofillElement = document.getElementById('autofill');
+var activeAutofillListID = 0;
+var activeAutofillListElement = document.getElementById('autofill'); //placeholder
+var autofillTerms = [];
 
 if (document.getElementById('index_identifier') === null) //must be day page
 {
@@ -72,6 +77,17 @@ function initializeMap() {
         }
     });
 
+    submitButtonElement.addEventListener('click', function () {
+        if (!solved) 
+        {
+            if (inputElement.value.length > 0 && guesses < max_guesses) 
+            {
+                checkInput();
+            }
+            displayAutofill(); //in autofill.js
+        }
+    });
+
     for (let i = 1; i <= max_guesses; i++) {
         hintElements[i-1].onclick = function () {
             show(i);
@@ -82,6 +98,70 @@ function initializeMap() {
         skip();
     }
 
+}
+
+function initializeAutofill()
+{
+    inputElement.addEventListener('keydown', function (pressed) { //active element tracking
+        if(autofillTerms.length > 0)
+        {
+            if(pressed.key === 'Tab')
+            {
+                pressed.preventDefault();
+                fillAutofillWithActiveTerm();
+            }
+            else if(pressed.key === 'ArrowUp')
+            {
+                pressed.preventDefault();
+                if(activeAutofillListID > 0)
+                {
+                    setActiveAutofillElement(activeAutofillListID - 1);
+                    activeAutofillListElement.scrollIntoView();
+                }
+            }
+            else if(pressed.key === 'ArrowDown')
+            {
+                pressed.preventDefault();
+                if(activeAutofillListID < autofillTerms.length - 1)
+                {
+                    setActiveAutofillElement(activeAutofillListID + 1);
+                    activeAutofillListElement.scrollIntoView();
+                }
+            }
+            
+        }
+    });
+    
+    inputElement.addEventListener('keyup', function (pressed) {
+        if(autofillTerms.length > 0)
+        {
+            pressed.preventDefault();
+        }
+        if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown' && inputElement.value.length > 1) 
+        {
+            displayAutofill();
+        }
+        if(pressed.key === 'Backspace' && inputElement.value.length < 2)
+        {
+            setAutofillActive(false);
+        }
+    });
+
+    inputElement.addEventListener('click', function()
+    {
+        if(inputElement.value.length > 1)
+        {
+            displayAutofill();
+        }
+    });
+
+    window.addEventListener('click', function(onClick)
+    {
+        if(onClick.target != autofillElement && onClick.target != inputElement)
+        {
+            setAutofillActive(false);
+        }
+    });
 }
 
 //set image and text hint
