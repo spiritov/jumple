@@ -149,7 +149,7 @@ function initializeAutofill()
 
     inputElement.addEventListener('click', function()
     {
-        if(inputElement.value.length > 1)
+        if(inputElement.value.length > 1  && !solved)
         {
             displayAutofill();
         }
