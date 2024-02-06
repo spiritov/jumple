@@ -18,6 +18,7 @@ body {
 
 /* nav bar */
 nav {
+	position: relative;
 	margin-bottom: 74px;
 	z-index: 9;
 }
@@ -353,6 +354,7 @@ nav li {
 	overflow: auto;
 	background-color: black;
 	background-color: rgba(0, 0, 0, 0.2);
+	z-index: 5;
 }
 
 #modal {

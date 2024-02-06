@@ -8,19 +8,56 @@ fetch('jumple_day_number.txt')
         displayDaysList(parseInt(text));
     });
 
+var allDaysElement = document.getElementById('all_days');
+var activeAppendContainerID = 1;
+
 function displayDaysList(days) {
-    for (let i = days; i > 0; i--) {
+    allDaysElement = document.getElementById('all_days');
+    activeAppendContainerID = 0;
+    for (let i = 1; i <= days; i++) {
+        if(i % 30 === 1)
+        {
+            addContainer(i);
+        }
         setDisplay(i);
     }
+    toggleContainer(activeAppendContainerID);
+}
+
+function addContainer(i)
+{
+    activeAppendContainerID++;
+    const days_container_toggle = document.createElement('div');  
+    days_container_toggle.id = 'container_toggle_' + activeAppendContainerID;
+    days_container_toggle.classList.add('days_container_toggle');
+    days_container_toggle.innerHTML = 'Days ' + i + '-' + (i+29);
+    days_container_toggle.style.opacity = '1';
+    allDaysElement.appendChild(days_container_toggle);
+
+    const container = document.createElement('div');
+    container.id = 'container_' + activeAppendContainerID;
+    container.classList.add('days_container');
+    allDaysElement.appendChild(container);
+
+    days_container_toggle.addEventListener('click', function() {
+        days_container_toggle.classList.toggle('active');
+        container.classList.toggle('active');
+    });
+}
+
+function toggleContainer(id)
+{
+    document.getElementById('container_toggle_' + activeAppendContainerID).classList.toggle('active');
+    document.getElementById('container_' + activeAppendContainerID).classList.toggle('active');
 }
 
 function setDisplay(day) {
-    //create new block
-    const container = document.getElementById('days_container');
+    const currentContainer = document.getElementById('container_' + activeAppendContainerID);
+    
     const link = document.createElement('a');
     link.id = day + '_link';
     link.href = day; //.html not needed
-    container.appendChild(link);
+    currentContainer.appendChild(link);
 
     const dayDiv = document.createElement('div');
     dayDiv.id = day;
@@ -63,7 +100,5 @@ function setDisplay(day) {
         localStorage.setItem('day' + day + '_history', JSON.stringify([]));
         dayDiv.innerHTML += '⬜⬜⬜⬜⬜';
     }
-    container.classList.add('active');
 }
 
-displayDaysList();
