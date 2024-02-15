@@ -569,7 +569,7 @@ const mapList = [
     new Map(['jump_reverentia_rc2','jump_reverentia','reverentia'], 'Soldier', '4', 'Finn91', 'https://tempus2.xyz/maps/jump_reverentia_rc2'),
     new Map(['jump_rewind','rewind'], 'Demo', '2', 'Sere', 'https://tempus2.xyz/maps/jump_rewind'),
     new Map(['jump_rewind2','rewind2'], 'Demo', '4', 'Sere', 'https://tempus2.xyz/maps/jump_rewind2'),
-    new Map(['jump_rex_final','jump_rex','rex'], 'Soldier', '5', 'Sere', 'https://tempus2.xyz/maps/jump_rex_final'),
+    new Map(['jump_rex_final','jump_rex','rex'], 'Soldier', '5', 'Seras', 'https://tempus2.xyz/maps/jump_rex_final'),
     new Map(['jump_rickoconnell','rickoconnell'], 'Soldier', '6', 'Seras', 'https://tempus2.xyz/maps/jump_rickoconnell'),
     new Map(['jump_ring2','ring2'], 'Demo', '4', 'RING', 'https://tempus2.xyz/maps/jump_ring2'),
     new Map(['jump_ring_final','jump_ring','ring'], 'Demo', '3', 'RING', 'https://tempus2.xyz/maps/jump_ring_final'),
