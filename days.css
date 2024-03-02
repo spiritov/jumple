@@ -39,7 +39,9 @@ nav img:hover {
 }
 
 nav ul {
+	float: left;
 	text-align: left;
+	width: 500px;
 	background-color: lightcoral;
 	padding-left: 8%;
 	position: fixed;
@@ -64,6 +66,12 @@ nav li {
 	cursor: pointer;
 }
 
+#kofi {
+	float: right;
+	height: 50px;
+	padding-right: 16%;
+	background-color: lightcoral;
+}
 @keyframes shake {
 	0% {
 		transform: rotate(4deg);
