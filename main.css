@@ -137,6 +137,11 @@ nav li {
 	cursor: pointer;
 	filter: contrast(1.25);
 }
+
+#hints li.activeHint {
+	filter: contrast(1.25);
+}
+
 #hints li.correct {
 	background-color: #6AAA64;
 	transform: rotateY(180deg);

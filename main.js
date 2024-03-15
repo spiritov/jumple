@@ -66,7 +66,7 @@ else //index page
 function initializeMap() {
     document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
     screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
-
+    hintElements[0].classList.add('activeHint');
     inputElement.addEventListener('keypress', function (pressed) {
         if (pressed.key === 'Enter' && !solved) {
             pressed.preventDefault();
@@ -168,6 +168,8 @@ function initializeAutofill()
 function show(hint_number) {
     if (hint_number <= max_guesses) { //don't try to show a hint that doesn't exist
         screenshotElement.src = 'assets/maps/' + day + '/' + hint_number + '.jpg';
+        document.getElementsByClassName('activeHint')[0].classList.remove('activeHint'); //should be fine
+        hintElements[hint_number - 1].classList.add('activeHint');
         switch (hint_number) {
             case 3:
                 mapHintElement.innerHTML = 'Intended Class: ' + map.intended_class;
