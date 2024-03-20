@@ -8,7 +8,8 @@ about_extraElement.innerHTML =
 'days can be viewed by clicking the calendar icon in the top left. I hope you find jumple fun! Please reach ' +
 'out if you encounter any issues, or would like to help contribute screenshots.<br><br>' +
 
-'New maps are updated every day at 12:00AM ET (UTC -5).';
+'New maps are updated every day at ' + 
+'<a href="https://www.timeanddate.com/worldclock/timezone/utc-5" target="_blank">12:00AM (UTC -5)</a>.';
 
 about.addEventListener('click', function() {
     modal_container.style.display = 'block';
