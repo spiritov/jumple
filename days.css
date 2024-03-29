@@ -258,3 +258,25 @@ nav li {
 	visibility: visible;
 	opacity: 1;
 }
+
+#map_name_toggle {
+	position: fixed;
+	z-index: 3;
+	left: 18px;
+	font-family: "Consolas", "Monaco", monospace;
+	margin-top: 10px;
+	user-select: none;
+	cursor: pointer;
+
+	padding: 10px;
+	background-color: darkgray;
+	border: 2px dashed gray;
+	border-radius: 10px;
+
+	transition: box-shadow 0.5s;
+}
+
+.map_name_active
+{
+	box-shadow: 0px 0px 10px 3px lavender;
+}

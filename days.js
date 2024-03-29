@@ -1,4 +1,6 @@
 //create as many day buttons as 'jumple_day.txt'
+var jumple_day_number = 1;
+var dayDisplays = [];
 
 fetch('jumple_day_number.txt')
     .then(function(response) {
@@ -6,6 +8,7 @@ fetch('jumple_day_number.txt')
     })
     .then(function(text) {
         displayDaysList(parseInt(text));
+        jumple_day_number = parseInt(text);
     });
 
 var allDaysElement = document.getElementById('all_days');
@@ -100,5 +103,39 @@ function setDisplay(day) {
         localStorage.setItem('day' + day + '_history', JSON.stringify([]));
         dayDiv.innerHTML += '⬜⬜⬜⬜⬜';
     }
+
+    dayDisplays.push(dayDiv.innerHTML);
 }
 
+//
+map_name_toggle_element = document.getElementById('map_name_toggle');
+map_name_toggle_element.addEventListener('click', function() {
+
+    if(map_name_toggle_element.className.includes('map_name_active')) //show day progress
+    {
+        map_name_toggle_element.classList.remove('map_name_active');
+
+        //show days again
+        for (i = 1; i <= jumple_day_number; i++) {
+            let dayDiv_box = document.getElementById(i);
+            dayDiv_box.innerHTML = dayDisplays[i-1];
+        }
+    }
+    else //show map name
+    {
+        map_name_toggle_element.classList.add('map_name_active');
+
+        for (i = 1; i <= jumple_day_number; i++) {
+            let dayDiv_box = document.getElementById(i);
+
+            if (dayDiv_box.className.includes('completed')) {
+                mapName = mapList[rngList[i - 1] - 1].name;
+                dayDiv_box.innerHTML = mapName[mapName.length - 1];
+                dayDiv_box.style.textAlign = 'center';
+                dayDiv_box.style.paddingRight = '0px';
+                dayDiv_box.style.width = '196px';
+            }
+        }
+    }
+    
+});
