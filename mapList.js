@@ -6,13 +6,12 @@ class Map {
         this.author = author;
         this.link = link;
     }
-
 }
 
 const autofillMapList = [
     'conc_concept', 'jump_4dakids_final', 'jump_4demo_fixed5', 'jump_4holers_fix', 'jump_4soldier_redo', 'jump_4starters_rc1', 'jump_5holers_final', 'jump_a_b3', 'jump_aando_b1_tmps', 'jump_abandon', 'jump_ablation_b4', 'jump_above_rc1', 'jump_abuq', 'jump_abyss_rc2', 'jump_acepogo', 'jump_achlys', 'jump_across_a27', 'jump_adam', 'jump_adventure', 'jump_aggregate_zip', 'jump_ahh_c', 'jump_ahrabaid_b2', 'jump_aigis_a4', 'jump_air', 'jump_airshift_a4', 'jump_airships_v2', 'jump_alder_rc3', 'jump_alienvspredator_v3', 'jump_allstars_fix', 'jump_amazon_b1', 'jump_and', 'jump_andromeda', 'jump_anime', 'jump_annex_v5', 'jump_anothermap_rc3', 'jump_ante', 'jump_antiquity', 'jump_anxiety_a9', 'jump_aperture_rc15', 'jump_apex_b1', 'jump_apparition', 'jump_aqua', 'jump_arc_b1_tmps', 'jump_arcane_final', 'jump_arctic_a2', 'jump_areae_b2', 'jump_aridia', 'jump_aris_a3', 'jump_ariser_fix', 'jump_armaldo', 'jump_armature_final_zip',
     'jump_around_cr', 'jump_artificial_a13', 'jump_arugula_b4', 'jump_ascent_final', 'jump_asdf', 'jump_asshole_a3', 'jump_ataronchronon_b2', 'jump_aten_test', 'jump_attached2_rcx', 'jump_attached3_final', 'jump_attached_b2', 'jump_auga_final', 'jump_aura_b4', 'jump_aurora_v2', 'jump_authn_b6', 'jump_autumn_rc3', 'jump_avalanche', 'jump_aviator', 'jump_ayers2_a8_zip', 'jump_ayers_v2', 'jump_azazel', 'jump_aznbob_fixed', 'jump_azure_v2', 'jump_babylon', 'jump_back_v3', 'jump_bait_a6', 'jump_ballin_a3', 'jump_balls_fix', 'jump_banane', 'jump_bane', 'jump_bangarang', 'jump_baqu_a2', 'jump_bear', 'jump_beef', 'jump_beefmas', 'jump_beefoween_b1', 'jump_beefster', 'jump_benny', 'jump_benroads2_a3', 'jump_benroads3', 'jump_benroads_a5', 'jump_beryllium_v5', 'jump_beyond_b3', 'jump_bigbutt_b1', 'jump_biome', 'jump_blables_b2', 'jump_blackout_a2', 'jump_blossom_s3f_fix2', 'jump_blubber_b4', 'jump_blueberry_b3',
-    'jump_bob_fixed', 'jump_bojack_v2', 'jump_bomb', 'jump_bongwater', 'jump_bonus', 'jump_boogiewoogie_a29', 'jump_booyah_jmc', 'jump_boredfox2_b1', 'jump_boredfox_b1', 'jump_boredgorge', 'jump_bounce', 'jump_bouncehop', 'jump_bouncelicious', 'jump_bouncerific_v2', 'jump_broccoli', 'jump_bromelia_final', 'jump_bunker_final', 'jump_butter', 'jump_buttered_b2', 'jump_byhicrine', 'jump_cake', 'jump_camp_rc2', 'jump_canyon_b1', 'jump_carp_b2', 'jump_carrot_a5', 'jump_catch_final', 'jump_causatham_rc5', 'jump_cavern_final', 'jump_celeriix', 'jump_cetalu_rc1', 'jump_chambers_v2', 'jump_chasm_final', 'jump_cheval', 'jump_chocological', 'jump_christmas_zip', 'jump_classics_a3', 'jump_claustro_final', 'jump_claustro_v2', 'jump_codegreen_b4', 'jump_collab', 'jump_competitive_b2', 'jump_composite', 'jump_compound', 'jump_concept_a5', 'jump_concrete_rc1', 'jump_confiote_rc1', 'jump_contact', 'jump_cool_b2', 'jump_core_b1_zip', 'jump_corona_v2', 'jump_cow',
+    'jump_bob_fixed', 'jump_bojack_v2', 'jump_bomb', 'jump_bongwater', 'jump_bonus', 'jump_boogiewoogie_a29', 'jump_booyah_jmc', 'jump_boredfox2_b1', 'jump_boredfox_b1', 'jump_boredgorge', 'jump_bounce', 'jump_bouncehop', 'jump_bouncelicious', 'jump_bouncerific_v2', 'jump_broccoli', 'jump_bromelia_final', 'jump_bunker_final', 'jump_butter', 'jump_buttered_b2', 'jump_byhicrine', 'jump_cake', 'jump_camp_rc2', 'jump_canyon_b1', 'jump_carp_b2', 'jump_carrot_a5', 'jump_catch_final', 'jump_causatham_rc5', 'jump_cavern_final', 'jump_celeriix', 'jump_cetalu_rc1', 'jump_chambers_v2', 'jump_chasm_final', 'jump_cheval', 'jump_chocological', 'jump_christmas_zip', 'jump_classics_a3', 'jump_claustro_final', 'jump_claustro_v2', 'jump_codegreen_b4', 'jump_collab', 'jump_competitive_b2', 'jump_composite', 'jump_compound', 'jump_concept_a5', 'jump_concrete_rc1', 'jump_confiote_rc1', 'jump_contact', 'jump_cool_b2', 'jump_core_b1_zip', 'jump_corona_v2',
     'jump_craze', 'jump_crunch', 'jump_crypt', 'jump_cube_b4', 'jump_cubic_zip', 'jump_cyskic_final', 'jump_dad', 'jump_daeva', 'jump_dahl', 'jump_dahlia_b1', 'jump_damer_rc6', 'jump_dan2', 'jump_dang', 'jump_data_final', 'jump_daylight_a2', 'jump_ddpls', 'jump_deep_final', 'jump_demania_rc2', 'jump_demolition', 'jump_demonstrationman_a4', 'jump_depleted', 'jump_depression_a11', 'jump_desa_rc2', 'jump_descent_v5', 'jump_deserted_b1', 'jump_desolate_rc6', 'jump_destination', 'jump_destination_v2', 'jump_detached_rcx', 'jump_devils_redo', 'jump_diabarha_b2', 'jump_diamant_rc5', 'jump_dicks_c', 'jump_diirtyxweezy_a1', 'jump_dink_b2', 'jump_donut_v3', 'jump_doodle_b9', 'jump_dread_a3', 'jump_dreamier', 'jump_dreamy_final', 'jump_drenched', 'jump_drexen', 'jump_drexen2', 'jump_drheinz', 'jump_drought_b1', 'jump_duality_tpn', 'jump_duey_v2', 'jump_dystopia', 'jump_echelon_rc1', 'jump_echo',
     'jump_edgebug_b2', 'jump_egyptian_b2', 'jump_eight_b5', 'jump_einfache_b1', 'jump_elephant_a2', 'jump_elite', 'jump_elysium_fn', 'jump_ember_rc6', 'jump_embrace', 'jump_empusa_final', 'jump_endurance_rc2', 'jump_eons_b2', 'jump_escape_rc4', 'jump_esri', 'jump_estrogen_a4', 'jump_eu', 'jump_evac_a3', 'jump_everest_a3', 'jump_evolved_final', 'jump_excavation_final', 'jump_exile_v3', 'jump_exilenpals', 'jump_ezekiel_beta3', 'jump_ezpz_v4', 'jump_facility', 'jump_factory', 'jump_fart2_final', 'jump_fart_final', 'jump_fastnfar_b1', 'jump_fauvism_a2', 'jump_fayte_final', 'jump_fear_redo', 'jump_festivus', 'jump_fifth', 'jump_finite_v2', 'jump_fisyx', 'jump_five_b2', 'jump_fizzydrink_a2', 'jump_flashblack', 'jump_flood', 'jump_flow_redo', 'jump_flukhtiz_v2_b2', 'jump_flux', 'jump_forest_rc4', 'jump_forgotten_rc5', 'jump_foss', 'jump_foundation_a2', 'jump_fox', 'jump_frayb_a4', 'jump_free_b2', 'jump_freezeflame_easy',
     'jump_frogspit', 'jump_frost_a1', 'jump_frost_redo_v2', 'jump_froyo_b3', 'jump_future_rebuild', 'jump_garbage_a7', 'jump_gateway_final', 'jump_gaylord', 'jump_gaylord2', 'jump_geronimo', 'jump_gervais_v3', 'jump_glassydev_final', 'jump_glassydev_rc3', 'jump_glow_v4', 'jump_gman_beta5_final_rebuild_rc1', 'jump_gr8_wite_final', 'jump_grape_final', 'jump_greenguy_rc2', 'jump_grimace', 'jump_grotto_rc2', 'jump_hajnal_finalbeta', 'jump_halcyon_b3', 'jump_half', 'jump_hana', 'jump_hanami_final_v2', 'jump_hangar_18', 'jump_happygonk_b7', 'jump_hardware', 'jump_haze', 'jump_heaven_a3', 'jump_heavy_b1', 'jump_heck', 'jump_hexahedron', 'jump_hobo', 'jump_hobo2_fixed', 'jump_hoi', 'jump_home_v2', 'jump_homie_beta', 'jump_hopstep_a3', 'jump_horus_b5_tpn', 'jump_hotcoffee_b1', 'jump_housebeta', 'jump_how', 'jump_huh_b6', 'jump_hydrogen_rc1_bmv', 'jump_iblis', 'jump_ice_v4', 'jump_ideation_b5', 'jump_if_rc2', 'jump_illuminum_tmps',
@@ -28,21 +27,21 @@ const autofillMapList = [
 ];
 
 const rngList = [
-588,665,591,555,220,43,447,248,56,478,571,330,496,170,85,723,635,86,14,597,341,529,507,415,587,210,78,305,528,232,362,601,523,204,450,483,621,214,418,113,131,22,524,619,116,668,324,487,158,273,
-566,247,292,343,161,539,16,274,716,428,211,640,98,484,208,144,66,686,598,495,177,479,46,401,217,411,290,329,535,387,396,44,684,228,564,631,308,137,685,486,18,198,457,285,212,183,127,100,672,206,333,
-600,628,565,87,493,682,388,241,328,120,321,355,550,205,652,4,246,488,470,262,548,504,491,467,436,55,202,681,331,653,179,35,489,425,530,53,200,255,363,10,585,642,256,139,420,546,58,525,518,
-190,689,375,680,173,649,163,218,94,426,68,317,138,95,315,307,277,439,500,605,51,445,650,320,376,81,427,485,381,409,28,542,146,314,96,91,88,501,466,443,725,319,660,407,532,521,97,511,417,
-618,62,141,267,168,261,134,610,187,616,226,645,360,123,70,593,69,243,705,678,465,237,207,162,448,105,471,136,632,142,257,194,276,697,581,476,570,79,5,166,377,391,23,90,182,339,271,435,352,679,
-625,118,203,287,7,176,490,38,93,429,416,185,272,442,201,392,192,297,536,506,403,234,89,167,148,8,583,143,153,693,64,6,313,83,112,110,197,569,358,279,498,119,312,45,104,281,630,613,654,289,3,
-368,178,468,253,699,386,382,676,579,556,50,636,278,626,15,599,353,374,11,446,644,614,181,463,304,250,700,21,245,553,611,590,380,609,188,687,594,193,637,326,215,577,238,551,294,602,221,347,175,219,494,
-152,701,19,132,318,437,77,639,151,106,133,715,691,316,503,379,481,667,229,169,364,460,92,12,36,692,499,663,514,114,275,702,696,575,236,171,404,512,502,372,300,480,624,254,20,472,260,65,361,688,473,
-282,73,508,453,41,61,562,541,482,627,421,135,573,533,434,557,717,560,574,383,344,223,449,71,225,464,454,461,433,242,606,647,586,227,422,477,641,336,589,32,658,52,373,24,268,673,128,337,115,283,713,
-26,309,102,620,366,149,393,25,515,342,251,244,405,49,563,441,554,258,520,683,286,413,455,538,720,698,526,432,603,622,145,714,690,288,150,412,126,552,301,323,27,664,196,31,509,121,129,370,704,656,80,
-30,147,284,438,568,346,48,57,703,394,338,510,666,280,397,424,252,643,332,40,659,615,633,674,164,293,29,474,617,107,59,357,74,213,303,340,160,623,576,172,117,718,558,634,544,249,17,299,414,
-721,695,395,423,156,513,351,109,406,63,270,722,671,191,629,327,103,334,399,559,400,9,675,462,349,310,540,378,311,549,708,398,694,67,469,706,165,582,607,527,350,657,184,711,13,638,42,677,335,367,345,
-365,534,296,475,655,410,348,34,291,354,222,592,419,72,2,75,371,385,669,359,124,456,157,595,492,302,259,431,224,47,269,389,384,519,295,578,596,325,505,76,430,444,240,356,452,322,108,82,180,459,497,
-402,37,707,233,517,661,155,522,369,231,545,265,140,670,451,572,235,719,537,608,710,216,390,662,440,195,239,531,230,604,111,263,561,60,298,712,174,186,54,189,266,408,84,516,584,39,306,130,612,125,99,
-1,547,264,543,709,101,33,159,567,209,154,122
+    582,658,585,550,217,43,443,245,56,474,565,326,492,167,84,715,628,85,14,590,337,525,503,411,581,207,77,301,524,229,358,594,519,201,446,479,614,211,414,112,130,22,520,612,115,661,320,483,156,270,560,
+    244,289,339,159,534,16,271,708,424,208,633,97,480,205,143,66,679,591,491,174,475,46,397,214,407,287,325,530,383,392,44,677,225,558,624,304,136,678,482,18,195,453,282,209,180,126,99,665,203,329,593,
+    621,559,86,489,675,384,238,324,119,317,351,545,202,645,4,243,716,484,466,259,543,500,487,463,432,55,199,674,327,646,176,35,485,421,644,526,53,197,252,359,10,579,635,253,138,416,541,58,521,514,187,
+    682,371,673,170,642,161,215,93,422,68,313,137,94,311,303,274,435,496,598,51,441,643,316,372,80,423,481,377,405,28,537,145,310,95,90,87,497,462,439,717,315,653,639,454,403,517,96,507,413,611,62,
+    140,264,641,258,133,603,184,609,223,638,356,122,70,587,69,240,698,671,461,234,204,160,444,104,467,135,625,141,254,191,273,690,575,472,564,78,5,164,373,387,23,89,179,335,268,431,348,672,618,117,200,
+    284,7,173,486,38,92,425,412,182,269,438,198,388,189,293,531,502,399,231,88,165,147,8,577,142,152,686,64,6,309,82,111,109,194,563,354,276,494,118,308,45,103,278,623,606,647,286,3,364,175,464,
+    250,692,382,378,669,573,551,50,629,275,619,15,592,349,370,11,442,637,607,178,459,300,247,693,21,242,548,604,584,376,602,185,680,588,190,630,322,212,571,235,546,291,595,218,343,172,216,490,151,694,19,
+    131,314,433,76,632,150,105,132,707,684,312,499,375,477,660,226,166,360,456,91,12,36,685,495,656,510,113,272,695,689,569,233,168,400,508,498,368,296,476,617,251,20,468,257,65,357,681,469,279,73,504,
+    449,41,61,556,536,478,620,417,134,567,528,430,552,709,554,568,379,340,220,445,71,222,460,450,457,429,239,599,640,580,224,418,473,634,332,583,32,651,52,369,24,265,666,127,333,114,280,26,305,101,613,
+    362,148,389,25,511,338,248,241,401,49,557,437,549,255,516,676,283,409,451,533,712,691,522,428,596,615,144,706,683,285,149,408,125,547,297,319,27,657,193,31,505,120,128,366,697,649,79,30,146,281,196,
+    434,562,342,48,57,696,390,334,506,659,277,393,420,249,636,328,40,652,608,626,667,162,290,29,470,610,106,59,353,74,210,574,299,336,158,616,570,169,116,710,553,627,539,246,17,295,410,713,688,391,419,
+    154,509,347,108,402,63,267,714,664,188,622,323,102,330,395,396,9,668,458,345,306,535,374,307,544,701,394,687,67,465,699,163,576,600,523,346,650,181,704,13,631,42,670,331,363,341,361,529,292,471,648,
+    406,344,34,288,350,219,585,415,72,2,75,367,381,662,355,123,452,155,589,488,298,256,427,221,47,266,385,380,515,572,321,501,426,440,237,352,448,318,107,81,177,455,493,398,37,700,230,513,654,153,518,
+    365,228,540,262,139,663,447,566,232,711,532,601,703,213,386,655,436,192,236,527,227,597,110,260,555,60,294,705,171,183,54,186,263,404,83,512,578,39,302,129,605,124,98,1,542,261,538,702,100,33,157,
+    561,206,121
 ];
 
 //map = mapList[rngList[day-1]-1];
@@ -122,7 +121,6 @@ const mapList = [
     new Map(['jump_azazel','azazel'], 'Demo', '4', 'myria', 'https://tempus2.xyz/maps/jump_azazel'),
     new Map(['jump_aznbob_fixed','jump_aznbob','aznbob'], 'Demo', '3', 'Aznbob', 'https://tempus2.xyz/maps/jump_aznbob_fixed'),
     new Map(['jump_azure_v2','jump_azure','azure'], 'Soldier', '5', 'Torii', 'https://tempus2.xyz/maps/jump_azure_v2'),
-    new Map(['jump_b00n','b00n'], '', '', '', 'https://tempus2.xyz/maps/jump_b00n'), //removed
     new Map(['jump_babylon','babylon'], 'Soldier', '3', 'Malecus', 'https://tempus2.xyz/maps/jump_babylon'),
     new Map(['jump_back_v3','jump_back','back'], 'Soldier', '4', 'Klowwd', 'https://tempus2.xyz/maps/jump_back_v3'),
     new Map(['jump_bait_a6','jump_bait','bait'], 'Solder / Demo', '3 / 2', 'hex', 'https://tempus2.xyz/maps/jump_bait_a6'),
@@ -200,7 +198,6 @@ const mapList = [
     new Map(['jump_cool_b2','jump_cool','cool'], 'Soldier', '4', 'Gebobus', 'https://tempus2.xyz/maps/jump_cool_b2'),
     new Map(['jump_core_b1_zip','jump_core','core'], 'Soldier', '4', 'Pants', 'https://tempus2.xyz/maps/jump_core_b1_zip'),
     new Map(['jump_corona_v2','jump_corona','corona'], 'Soldier', '5', 'Lopez, Waldo, Pants, Exile, tev, tyjle, yeye, Klowwd, maxxy, reero, Zyphon, Larry, plopy, 879m, osplo, xlcvs, Donuttt, dipp, scotch, syphilis, Mazlli, i sure hope this doesnt break the ui', 'https://tempus2.xyz/maps/jump_corona_v2'),
-    new Map(['jump_cow','cow'], 'Soldier', '', '', 'https://tempus2.xyz/maps/jump_cow'), //removed
     new Map(['jump_craze','craze'], 'Soldier', '2', 'False_', 'https://tempus2.xyz/maps/jump_craze'),
     new Map(['jump_crunch','crunch'], 'Soldier', '3', 'tooplis', 'https://tempus2.xyz/maps/jump_crunch'),
     new Map(['jump_crypt','crypt'], 'Demo', '3', 'Electro, Sere', 'https://tempus2.xyz/maps/jump_crypt'),
@@ -214,7 +211,6 @@ const mapList = [
     new Map(['jump_damer_rc6','jump_damer','damer'], 'Soldier', '4', 'dipp', 'https://tempus2.xyz/maps/jump_damer_rc6'),
     new Map(['jump_dan2','dan2'], 'Demo', '4', 'dante_', 'https://tempus2.xyz/maps/jump_dan2'),
     new Map(['jump_dang','dang'], 'Demo', '6', 'bshear', 'https://tempus2.xyz/maps/jump_dang'),
-    new Map(['jump_dang_r','jump_dang','dang'], 'Demo', '', '', 'https://tempus2.xyz/maps/jump_dang_r'), //removed
     new Map(['jump_data_final','jump_data','data'], 'Demo', '3', 'Consition', 'https://tempus2.xyz/maps/jump_data_final'),
     new Map(['jump_daylight_a2','jump_daylight','daylight'], 'Demo', '4', 'John', 'https://tempus2.xyz/maps/jump_daylight_a2'),
     new Map(['jump_ddpls','ddpls'], 'Soldier', '5', 'dd5f', 'https://tempus2.xyz/maps/jump_ddpls'),
@@ -341,7 +337,6 @@ const mapList = [
     new Map(['jump_hoi','hoi'], 'Soldier', '4', 'HOI', 'https://tempus2.xyz/maps/jump_hoi'),
     new Map(['jump_home_v2','jump_home','home'], 'Soldier', '3', 'Sitood', 'https://tempus2.xyz/maps/jump_home_v2'),
     new Map(['jump_homie_beta','jump_homie','homie'], 'Demo', '5', 'Raina', 'https://tempus2.xyz/maps/jump_homie_beta'),
-    new Map(['jump_hopstep2_rc7','jump_hopstep2','hopstep2'], 'Soldier', '', '', 'https://tempus2.xyz/maps/jump_hopstep2_rc7'), //removed
     new Map(['jump_hopstep_a3','jump_hopstep','hopstep'], 'Soldier', '4', 'A10', 'https://tempus2.xyz/maps/jump_hopstep_a3'),
     new Map(['jump_horus_b5_tpn','jump_horus','horus'], 'Demo', '6', 'Consition', 'https://tempus2.xyz/maps/jump_horus_b5_tpn'),
     new Map(['jump_hotcoffee_b1','jump_hotcoffee','hotcoffee'], 'Soldier', '3', 'Mouse*', 'https://tempus2.xyz/maps/jump_hotcoffee_b1'),
@@ -578,7 +573,6 @@ const mapList = [
     new Map(['jump_rope_final','jump_rope','rope'], 'Soldier', '4', 'BQE', 'https://tempus2.xyz/maps/jump_rope_final'),
     new Map(['jump_ruelee_a6','jump_ruelee','ruelee'], 'Soldier', '4', 'RueLee', 'https://tempus2.xyz/maps/jump_ruelee_a6'),
     new Map(['jump_rush','rush'], 'Soldier / Demo', '1 / 1', 'Bob+M|M+', 'https://tempus2.xyz/maps/jump_rush'),
-    new Map(['jump_rush_h','jump_rush','rush'], 'Demo', '', '', 'https://tempus2.xyz/maps/jump_rush_h'), //removed
     new Map(['jump_rust_rc3','jump_rust','rust'], 'Demo', '3', 'Consition', 'https://tempus2.xyz/maps/jump_rust_rc3'),
     new Map(['jump_rutabaga_rc2','jump_rutabaga','rutabaga'], 'Demo', '6', 'osplo', 'https://tempus2.xyz/maps/jump_rutabaga_rc2'),
     new Map(['jump_rvr_b1','jump_rvr','rvr'], 'Demo', '6', 'CrancK', 'https://tempus2.xyz/maps/jump_rvr_b1'),
@@ -605,7 +599,6 @@ const mapList = [
     new Map(['jump_sick','sick'], 'Soldier', '4', 'Sere', 'https://tempus2.xyz/maps/jump_sick'),
     new Map(['jump_signal_final','jump_signal','signal'], 'Demo', '3', 'Consition', 'https://tempus2.xyz/maps/jump_signal_final'),
     new Map(['jump_silly_a8','jump_silly','silly'], 'Soldier', '4', 'CrancK', 'https://tempus2.xyz/maps/jump_silly_a8'),
-    new Map(['jump_silly_fin','jump_silly','silly'], 'Soldier', '', '', 'https://tempus2.xyz/maps/jump_silly_fin'), //removed
     new Map(['jump_simplified_rc1','jump_simplified','simplified'], 'Soldier', '4', 'Elandi', 'https://tempus2.xyz/maps/jump_simplified_rc1'),
     new Map(['jump_simply_v2','jump_simply','simply'], 'Soldier', '4', 'Elandi, MEGAWOP', 'https://tempus2.xyz/maps/jump_simply_v2'),
     new Map(['jump_sinister_final_ver2','jump_sinister','sinister'], 'Soldier', '6', 'TomSinister', 'https://tempus2.xyz/maps/jump_sinister_final_ver2'),
@@ -642,7 +635,6 @@ const mapList = [
     new Map(['jump_squared_b2','jump_squared','squared'], 'Soldier', '6', 'Ksquared, bshear', 'https://tempus2.xyz/maps/jump_squared_b2'),
     new Map(['jump_starkie_tpn','jump_starkie','starkie'], 'Demo', '6', 'Seras', 'https://tempus2.xyz/maps/jump_starkie_tpn'),
     new Map(['jump_start_b4','jump_start','start'], 'Demo', '4', '879m', 'https://tempus2.xyz/maps/jump_start_b4'),
-    new Map(['jump_start_h','jump_start','start'], 'Demo', '', '', 'https://tempus2.xyz/maps/jump_start_h'), //removed
     new Map(['jump_starve','starve'], 'Soldier', '4', 'Hellbent', 'https://tempus2.xyz/maps/jump_starve'),
     new Map(['jump_starwars_rc2','jump_starwars','starwars'], 'Soldier / Demo', '4 / 3', 'Waldo, reero', 'https://tempus2.xyz/maps/jump_starwars_rc2'),
     new Map(['jump_steak_a2','jump_steak','steak'], 'Demo', '3', 'Raina', 'https://tempus2.xyz/maps/jump_steak_a2'),
@@ -759,7 +751,6 @@ const mapList = [
     new Map(['jump_zawty_rc1','jump_zawty','zawty'], 'Soldier', '4', 'Elandi', 'https://tempus2.xyz/maps/jump_zawty_rc1'),
     new Map(['jump_zekro_v4','jump_zekro','zekro'], 'Demo', '6', 'Superchunk', 'https://tempus2.xyz/maps/jump_zekro_v4'),
     new Map(['jump_zero','zero'], 'Demo', '3', 'Drexen', 'https://tempus2.xyz/maps/jump_zero'),
-    new Map(['jump_zero_v2','jump_zero','zero'], 'Demo', '', '', 'https://tempus2.xyz/maps/jump_zero_v2'), //removed
     new Map(['jump_zetsubou_v3','jump_zetsubou','zetsubou'], 'Soldier', '5', 'RainForce', 'https://tempus2.xyz/maps/jump_zetsubou_v3'),
     new Map(['jump_ziggurat_b3_zip','jump_ziggurat','ziggurat'], 'Soldier', '5', 'Pants', 'https://tempus2.xyz/maps/jump_ziggurat_b3_zip'),
     new Map(['jump_zilent','zilent'], 'Demo', '6', 'wild', 'https://tempus2.xyz/maps/jump_zilent'),
