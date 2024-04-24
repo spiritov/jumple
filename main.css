@@ -572,4 +572,10 @@ nav li {
 	border-radius: 20px;
 	margin-bottom: 10px;
 	}
+
+	#map_image_container.enlarge {
+		max-height: fit-content;
+		max-width: fit-content;
+		cursor: zoom-out;
+	}
 }
