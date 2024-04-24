@@ -5,6 +5,7 @@ var map = mapList[rngList[day-1]-1]; //default
 let guesses = 0;
 const max_guesses = 5;
 let solved = false;
+const screenshotContainerElement = document.getElementById('map_image_container');
 const screenshotElement = document.getElementById('screenshot');
 const mapHintElement = document.getElementById('map_hint');
 const inputElement = document.getElementById('input');
@@ -67,6 +68,11 @@ function initializeMap() {
     document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
     screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
     hintElements[0].classList.add('activeHint');
+
+    screenshotElement.addEventListener('click', function() {
+        screenshotContainerElement.classList.toggle('enlarge');
+    });
+
     inputElement.addEventListener('keypress', function (pressed) {
         if (pressed.key === 'Enter' && !solved) {
             pressed.preventDefault();

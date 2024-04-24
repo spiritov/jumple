@@ -20,7 +20,7 @@ body {
 nav {
 	position: relative;
 	margin-bottom: 74px;
-	z-index: 9;
+	z-index: 5;
 }
 
 nav img {
@@ -89,6 +89,14 @@ nav li {
 	margin: auto;
 	margin-bottom: 8px;
 	margin-top: 5px;
+	transition: max-height 0.1s, max-width 0.1s;
+	cursor: zoom-in;
+}
+
+#map_image_container.enlarge {
+	max-height: 720px;
+	max-width: 1280px;
+	cursor: zoom-out;
 }
 
 #screenshot {
@@ -100,6 +108,11 @@ nav li {
 	border-color: #000000;
 	border-radius: 10px;
 	background-color: slategray;
+	transition: filter 1.25s;
+}
+
+#screenshot:hover {
+	filter: brightness(1.5);
 }
 
 /* hint elements */
@@ -305,6 +318,7 @@ nav li {
 	padding-left: 8px;
 	padding-right: 8px;
 	margin: auto;
+	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.65));
@@ -342,7 +356,6 @@ nav li {
 	line-height: 32px;
 	border: 3px solid black;
 	border-radius: 10px;
-	border-radius: 10px;
 }
 
 #twitter {
@@ -358,7 +371,7 @@ nav li {
 #modal_container {
 	display: none;
 	position: fixed;
-	z-index: 4;
+	z-index: 9;
 	padding-top: 7%;
 	left: 0;
 	top: 0;
@@ -371,6 +384,7 @@ nav li {
 }
 
 #modal {
+	
 	font-family: "Consolas", monospace;
 	background-color: lavender;
 	margin: auto;
@@ -383,6 +397,7 @@ nav li {
 }
 
 #about_text {
+	font-size: 18px;
 	font-family: "Consolas", monospace;
 	padding: 28px;
 	text-align: left;
@@ -390,16 +405,19 @@ nav li {
 
 #about_top,
 #about_bottom {
+	font-size: 18px;
 	font-family: "Consolas", monospace;
 	text-align: center;
 }
 
 #about_extra {
+	font-size: 18px;
 	font-family: "Consolas", monospace
 }
 
 #about_text a,
 #about_top a {
+	font-size: 18px;
 	font-family: "Consolas", monospace;
 	font-weight: bold;
 	color: blue;
@@ -422,6 +440,7 @@ nav li {
 }
 
 #tooltip {
+	font-size: 18px;
 	font-family: "Consolas", monospace;
 	position: relative;
 	display: inline-block;
@@ -429,6 +448,7 @@ nav li {
 }
 
 #tooltiptext {
+	font-size: 18px;
 	font-family: "Consolas", monospace;
 	opacity: 0;
 	width: 120px;
@@ -451,4 +471,105 @@ nav li {
 #tooltip:hover #tooltiptext {
 	visibility: visible;
 	opacity: 1;
+}
+
+/* resize things for mobile */
+@media (max-width: 1250px) {
+	* {
+	font-size: 32px;
+	}
+
+	nav {
+		margin-bottom: 100px;
+	}
+
+	nav li {
+		width: 150px;
+		height: 75px;
+	}
+
+	#kofi {
+		height: 75px;
+		padding-right: 8%;
+	}
+
+	body {
+		margin-bottom: 300px;
+	}
+
+	#map_name {
+	margin-top: 10px;
+	font-size: 72px;
+	filter: drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.65));
+	}
+
+	#hints li {
+	width: 128px;
+	height: 128px;
+	vertical-align: middle;
+	line-height: 128px;
+	border: 6px solid black;
+	border-radius: 20px;
+	}
+	
+	#input {
+	height: 80px;
+	border-radius: 6px;
+	border-width: 0px;
+	width: 800px;
+	}
+
+	#input[type=text] {
+		font-size: 32px;
+	}
+
+	#input:focus {
+		box-shadow: 0px 0px 4px 6px black;
+	}
+
+	#autofill {
+		width: 800px;
+		margin-top: -3px;
+	}
+	
+	#autofill ::-webkit-scrollbar {
+		width: 22px;
+		background: black;
+	}
+	
+	#autofill ul {
+		list-style-type:none;
+		padding: 0px;
+		margin: 0px;
+		background-color: gray;
+		max-height: 245px;
+		overflow-y: scroll;
+	}
+	
+	#autofill li {
+		font-family: "Consolas", "Monaco", monospace;
+		padding: 5px;
+		border-bottom: 2px dashed darkgray;
+	}
+
+	#submit_button {
+	margin-bottom: 4px;
+	margin-left: -136px;
+	height: 82px;
+	width: 128px;
+	line-height: 80px;
+	border-radius: 6px;
+	}
+
+	#share_container li {
+	margin-top: 20px;
+	display: inline-block;
+	width: 256px;
+	height: 64px;
+	vertical-align: middle;
+	line-height: 64px;
+	border: 5px solid black;
+	border-radius: 20px;
+	margin-bottom: 10px;
+	}
 }
