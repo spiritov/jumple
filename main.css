@@ -397,7 +397,7 @@ nav li {
 }
 
 #about_text {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: "Consolas", monospace;
 	padding: 28px;
 	text-align: left;
@@ -405,19 +405,19 @@ nav li {
 
 #about_top,
 #about_bottom {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: "Consolas", monospace;
 	text-align: center;
 }
 
 #about_extra {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: "Consolas", monospace
 }
 
 #about_text a,
 #about_top a {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: "Consolas", monospace;
 	font-weight: bold;
 	color: blue;
@@ -440,7 +440,7 @@ nav li {
 }
 
 #tooltip {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: "Consolas", monospace;
 	position: relative;
 	display: inline-block;
@@ -448,7 +448,7 @@ nav li {
 }
 
 #tooltiptext {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: "Consolas", monospace;
 	opacity: 0;
 	width: 120px;
@@ -465,7 +465,6 @@ nav li {
 	margin-left: -60px;
 	transition: opacity 0.5s;
 	visibility: hidden;
-
 }
 
 #tooltip:hover #tooltiptext {
