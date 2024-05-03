@@ -93,12 +93,13 @@ nav li {
 	}
 }
 
+/* animation on firefox ignores subpixel rendering unless rotation is added*/
 @keyframes pan {
 	0% {
-	  transform: translateX(0) translateY(0);
+	  transform: translateX(0) translateY(0) rotate(0.1deg);
 	}
 	100% {
-	  transform: translateX(-738px) translateY(-738px);
+	  transform: translateX(-738px) translateY(-738px) rotate(0.1deg);
 	}
 }
 

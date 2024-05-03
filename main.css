@@ -93,7 +93,7 @@ nav li {
 	}
 }
 
-/* animation on firefox is choppy unless rotation is added*/
+/* animation on firefox ignores subpixel rendering unless rotation is added*/
 @keyframes pan {
 	0% {
 	  transform: translateX(0) translateY(0) rotate(0.1deg);
