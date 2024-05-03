@@ -12,7 +12,12 @@ body {
 	margin: 0;
 	text-align: center;
 	color: black;
-	background-color: slategray;
+	background-color: #1E1D1E;
+	transition: background-color 0.5s;
+}
+
+body.dashedBG {
+	background-color: #1E1D1E;
 }
 
 /* nav bar */
@@ -20,8 +25,13 @@ nav {
 	position: relative;
 	margin-bottom: 74px;
 	z-index: 5;
+	opacity: 0.85;
+	transition: opacity 0.5s;
 }
 
+nav:hover {
+	opacity: 1;
+}
 nav img {
 	height: 100%;
 	width: 100%;
@@ -81,6 +91,54 @@ nav li {
 	50% {
 		transform: rotate(-4deg);
 	}
+}
+
+@keyframes pan {
+	0% {
+	  transform: translateX(0) translateY(0);
+	}
+	100% {
+	  transform: translateX(-738px) translateY(-738px);
+	}
+}
+
+#background_container.enabled {
+	overflow: hidden;
+	position: fixed;
+	z-index: -2;
+	top: -50px;
+	width: 150%;
+	height: 200%;
+	opacity: 1;
+	transition: opacity 0.5s;
+}
+
+#background_container {
+	opacity: 0;
+}
+
+#background_pattern {
+	background-image: url("assets/site/mixedlarge.png");
+	height: 100%;
+	width: 100%;
+	animation: pan 120s linear infinite;
+}
+
+#background_gradient.enabled {
+	background: radial-gradient(circle at 50%, transparent 60%, #1E1D1E 100%),
+				linear-gradient(to bottom, transparent 90%, #1E1D1E 100%);
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	opacity: 1;
+	transition: opacity 0.5s;
+}
+
+#background_gradient {
+	opacity: 0;
 }
 
 #all_days
@@ -264,12 +322,11 @@ nav li {
 	opacity: 1;
 }
 
-#map_name_toggle {
+.options {
 	position: fixed;
 	z-index: 3;
 	left: 18px;
 	font-family: "Consolas", "Monaco", monospace;
-	margin-top: 10px;
 	user-select: none;
 	cursor: pointer;
 
@@ -278,12 +335,20 @@ nav li {
 	border: 2px dashed gray;
 	border-radius: 10px;
 
-	transition: box-shadow 0.5s;
+	transition: box-shadow 0.25s;
 }
 
-.map_name_active
+#map_name_toggle {
+	margin-top: 10px;
+}
+
+#background_toggle {
+	margin-top: 60px;
+}
+
+.option_active
 {
-	box-shadow: 0px 0px 10px 3px lavender;
+	box-shadow: 0px 0px 8px 2px lavender;
 }
 
 /* resize nav on mobile */

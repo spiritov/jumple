@@ -1,12 +1,16 @@
 //create as many day buttons as 'jumple_day.txt'
 var jumple_day_number = 1;
 var dayDisplays = [];
+var backgroundPreset = '1';
+const backgroundContainerElement = document.getElementById('background_container');
+const backgroundGradientElement = document.getElementById('background_gradient');
+const background_toggle_element = document.getElementById('background_toggle');
 
 fetch('jumple_day_number.txt')
-    .then(function(response) {
+    .then(function (response) {
         return response.text();
     })
-    .then(function(text) {
+    .then(function (text) {
         displayDaysList(parseInt(text));
         jumple_day_number = parseInt(text);
     });
@@ -18,8 +22,7 @@ function displayDaysList(days) {
     allDaysElement = document.getElementById('all_days');
     activeAppendContainerID = 0;
     for (let i = 1; i <= days; i++) {
-        if(i % 30 === 1)
-        {
+        if (i % 30 === 1) {
             addContainer(i);
         }
         setDisplay(i);
@@ -27,13 +30,12 @@ function displayDaysList(days) {
     toggleContainer(activeAppendContainerID);
 }
 
-function addContainer(i)
-{
+function addContainer(i) {
     activeAppendContainerID++;
-    const days_container_toggle = document.createElement('div');  
+    const days_container_toggle = document.createElement('div');
     days_container_toggle.id = 'container_toggle_' + activeAppendContainerID;
     days_container_toggle.classList.add('days_container_toggle');
-    days_container_toggle.innerHTML = 'Days ' + i + '-' + (i+29);
+    days_container_toggle.innerHTML = 'Days ' + i + '-' + (i + 29);
     days_container_toggle.style.opacity = '1';
     allDaysElement.appendChild(days_container_toggle);
 
@@ -42,21 +44,20 @@ function addContainer(i)
     container.classList.add('days_container');
     allDaysElement.appendChild(container);
 
-    days_container_toggle.addEventListener('click', function() {
+    days_container_toggle.addEventListener('click', function () {
         days_container_toggle.classList.toggle('active');
         container.classList.toggle('active');
     });
 }
 
-function toggleContainer(id)
-{
+function toggleContainer(id) {
     document.getElementById('container_toggle_' + activeAppendContainerID).classList.toggle('active');
     document.getElementById('container_' + activeAppendContainerID).classList.toggle('active');
 }
 
 function setDisplay(day) {
     const currentContainer = document.getElementById('container_' + activeAppendContainerID);
-    
+
     const link = document.createElement('a');
     link.id = day + '_link';
     link.href = day; //.html not needed
@@ -107,23 +108,22 @@ function setDisplay(day) {
     dayDisplays.push(dayDiv.innerHTML);
 }
 
-//
 map_name_toggle_element = document.getElementById('map_name_toggle');
-map_name_toggle_element.addEventListener('click', function() {
+map_name_toggle_element.addEventListener('click', function () {
 
-    if(map_name_toggle_element.className.includes('map_name_active')) //show day progress
+    if (map_name_toggle_element.className.includes('option_active')) //show day progress
     {
-        map_name_toggle_element.classList.remove('map_name_active');
+        map_name_toggle_element.classList.remove('option_active');
 
         //show days again
         for (i = 1; i <= jumple_day_number; i++) {
             let dayDiv_box = document.getElementById(i);
-            dayDiv_box.innerHTML = dayDisplays[i-1];
+            dayDiv_box.innerHTML = dayDisplays[i - 1];
         }
     }
     else //show map name
     {
-        map_name_toggle_element.classList.add('map_name_active');
+        map_name_toggle_element.classList.add('option_active');
 
         for (i = 1; i <= jumple_day_number; i++) {
             let dayDiv_box = document.getElementById(i);
@@ -137,5 +137,46 @@ map_name_toggle_element.addEventListener('click', function() {
             }
         }
     }
-    
+});
+
+//background toggling
+function setBackground(id) {
+    if (id == '1') {
+        document.body.classList.add('dashedBG');
+        document.body.style.backgroundColor = '#1E1D1E'; //necessary for now
+        background_toggle_element.classList.add('option_active');
+        backgroundContainerElement.classList.add('enabled');
+        backgroundGradientElement.classList.add('enabled');
+    }
+    else {
+        document.body.classList.remove('dashedBG');
+        document.body.style.backgroundColor = 'slategrey';
+        backgroundContainerElement.classList.remove('enabled');
+        backgroundGradientElement.classList.remove('enabled');
+        
+    }
+}
+
+//localStorage for background
+if (localStorage.getItem('background')) {
+    backgroundPreset = localStorage.getItem('background');
+    setBackground(backgroundPreset);
+}
+else {
+    localStorage.setItem('background', '1');
+    setBackground('1');
+}
+
+background_toggle_element.addEventListener('click', function () {
+
+    if (background_toggle_element.className.includes('option_active')) { //revert active background and save to localStorage
+        background_toggle_element.classList.remove('option_active');
+        setBackground('0');
+        localStorage.setItem('background', '0');
+    }
+    else {
+        background_toggle_element.classList.add('option_active');
+        setBackground('1');
+        localStorage.setItem('background', '1');
+    } //apply active background and save to localStorage
 });

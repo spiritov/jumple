@@ -5,6 +5,7 @@ var map = mapList[rngList[day-1]-1]; //default
 let guesses = 0;
 const max_guesses = 5;
 let solved = false;
+const dayNumberElement = document.getElementById('day_number');
 const screenshotContainerElement = document.getElementById('map_image_container');
 const screenshotElement = document.getElementById('screenshot');
 const mapHintElement = document.getElementById('map_hint');
@@ -13,6 +14,7 @@ const submitButtonElement = document.getElementById('submit_button');
 const inputHistoryElement = document.getElementById('input_history');
 var resultsTracker = ''; //populated by localStorage if it exists
 var resultsHistory = []; //populated by localStorage if it exists
+var backgroundPreset = 1;
 const hintElements = [
     document.getElementById("hint_1"),
     document.getElementById("hint_2"),
@@ -23,7 +25,7 @@ const hintElements = [
 const autofillElement = document.getElementById('autofill');
 var activeAutofillListID = 0;
 var activeAutofillListElement = document.getElementById('autofill'); //placeholder
-var autofillTerms = [];
+var autofillTerms = []
 
 if (document.getElementById('index_identifier') === null) //must be day page
 {
@@ -65,7 +67,7 @@ else //index page
 
 //set day specific parts of page
 function initializeMap() {
-    document.getElementById('day_number').innerHTML = 'Jumple Day ' + day;
+    dayNumberElement.innerHTML = 'Jumple Day ' + day;
     screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
     hintElements[0].classList.add('activeHint');
 
@@ -339,13 +341,29 @@ function getResultsString(results) {
     return results;
 }
 
+function setBackground(id)
+{
+    if(id == '1')
+    {
+        document.body.classList.add('dashedBG');
+        dayNumberElement.classList.add('dashedBG');
+        mapHintElement.classList.add('dashedBG');
+        document.getElementById('background_container').classList.add('enabled');
+        document.getElementById('background_gradient').classList.add('enabled');
+    }
+    else
+    {
+        document.body.style.backgroundColor = 'slategrey';
+    }
+}
+
 //set game from storage if it exists
 function checkLocalStorage() {
+
     if (localStorage.getItem('day' + day + '_result') && localStorage.getItem('day' + day + '_history')) {
         //populate game state
         resultsTracker = localStorage.getItem('day' + day + '_result');
         resultsHistory = JSON.parse(localStorage.getItem('day' + day + '_history'))
-
         inputHistoryElement.classList.add('border');
         guesses = resultsTracker.length;
 
@@ -373,4 +391,14 @@ function checkLocalStorage() {
         localStorage.setItem('day' + day + '_result', '');
         localStorage.setItem('day' + day + '_history', JSON.stringify(resultsHistory));
     }
+}
+
+//load background
+if(localStorage.getItem('background')) {
+    backgroundPreset =  localStorage.getItem('background');
+    setBackground(backgroundPreset);
+}
+else {
+    localStorage.setItem('background', '1');
+    setBackground('1');
 }
