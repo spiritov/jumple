@@ -108,14 +108,16 @@ nav li {
 	position: fixed;
 	z-index: -2;
 	top: -50px;
-	width: 150%;
+	width: 200%;
 	height: 200%;
 	opacity: 1;
 	transition: opacity 0.5s;
+	background-color: #1E1D1E;
 }
 
 #background_container {
 	opacity: 0;
+	background-color: #1E1D1E;
 }
 
 #background_pattern {
