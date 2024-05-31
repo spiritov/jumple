@@ -242,7 +242,7 @@ const mapList = [
     new Map(['jump_drexen','drexen'], 'Demo', '3', 'Drexen', 'https://tempus2.xyz/maps/jump_drexen'),
     new Map(['jump_drexen2','drexen2'], 'Demo', '4', 'Drexen', 'https://tempus2.xyz/maps/jump_drexen2'),
     new Map(['jump_drheinz','drheinz'], 'Demo', '4', 'Raina', 'https://tempus2.xyz/maps/jump_drheinz'),
-    new Map(['jump_drought_b1 ','jump_drought','drought'], 'Demo', '6', 'bshear', 'https://tempus2.xyz/maps/jump_drought_b1 '),
+    new Map(['jump_drought_b1','jump_drought','drought'], 'Demo', '6', 'bshear', 'https://tempus2.xyz/maps/jump_drought_b1 '),
     new Map(['jump_duality_tpn','jump_duality','duality'], 'Soldier / Demo', '3 / 3', 'False_', 'https://tempus2.xyz/maps/jump_duality_tpn'),
     new Map(['jump_duey_v2','jump_duey','duey'], 'Soldier', '4', 'Bematt', 'https://tempus2.xyz/maps/jump_duey_v2'),
     new Map(['jump_dystopia','dystopia'], 'Soldier', '4', 'Jasska', 'https://tempus2.xyz/maps/jump_dystopia'),
