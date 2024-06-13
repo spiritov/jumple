@@ -120,14 +120,14 @@ function fixDays() {
     //day 65 (eight)
     for(let i = 0; i < eightHistory.length; i++) {
         for(let j = 0; j < eightNames.length; j++) {
-            if(eightHistory[i] === eightNames[j] && !solved) {
+            if(eightHistory[i] == eightNames[j] && !solved) {
                     solved = true;
                     temp_results_tracker += '1';
                     localStorage.setItem('day' + 65 + '_result', temp_results_tracker);
                 }
-                else if (!solved){
-                    temp_results_tracker += '0';
-                }
+        }
+        if(!solved){
+            temp_results_tracker += '0';
         }
     }
 
@@ -138,14 +138,14 @@ function fixDays() {
     //day 140 (drought)
     for(let i = 0; i < droughtHistory.length; i++) {
         for(let j = 0; j < droughtNames.length; j++) {
-            if(droughtHistory[i] === droughtNames[j] && !solved) {
+            if(droughtHistory[i] == droughtNames[j] && !solved) {
                     solved = true;
                     temp_results_tracker += '1';
                     localStorage.setItem('day' + 140 + '_result', temp_results_tracker);
                 }
-                else if (!solved){
-                    temp_results_tracker += '0';
-                }
+        }
+        if(!solved){
+            temp_results_tracker += '0';
         }
     }
 
