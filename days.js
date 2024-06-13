@@ -108,6 +108,54 @@ function setDisplay(day) {
     dayDisplays.push(dayDiv.innerHTML);
 }
 
+//overwrite day 65 & 140 errors, remove later
+function fixDays() {
+    const eightHistory = JSON.parse(localStorage.getItem('day' + 65 + '_history'));
+    const eightNames = mapList[rngList[65-1]-1].name;
+    const droughtHistory = JSON.parse(localStorage.getItem('day' + 140 + '_history'));
+    const droughtNames = mapList[rngList[140-1]-1].name;
+    let temp_results_tracker = '';
+    let solved = false;
+
+    //day 65 (eight)
+    for(let i = 0; i < eightHistory.length; i++) {
+        for(let j = 0; j < eightNames.length; j++) {
+            if(eightHistory[i] === eightNames[j] && !solved) {
+                    solved = true;
+                    temp_results_tracker += '1';
+                    localStorage.setItem('day' + 65 + '_result', temp_results_tracker);
+                }
+                else if (!solved){
+                    temp_results_tracker += '0';
+                }
+        }
+    }
+
+    //reset
+    temp_results_tracker = '';
+    solved = false;
+
+    //day 140 (drought)
+    for(let i = 0; i < droughtHistory.length; i++) {
+        for(let j = 0; j < droughtNames.length; j++) {
+            if(droughtHistory[i] === droughtNames[j] && !solved) {
+                    solved = true;
+                    temp_results_tracker += '1';
+                    localStorage.setItem('day' + 140 + '_result', temp_results_tracker);
+                }
+                else if (!solved){
+                    temp_results_tracker += '0';
+                }
+        }
+    }
+
+}
+const eightResult = localStorage.getItem('day' + 65 + '_result');
+const droughtResult = localStorage.getItem('day' + 140 + '_result');
+if(eightResult[0] == '0' || droughtResult[0] == '0') {
+    fixDays();
+}
+
 map_name_toggle_element = document.getElementById('map_name_toggle');
 map_name_toggle_element.addEventListener('click', function () {
 
