@@ -762,5 +762,5 @@ const mapList = [
     new Map(['rj_rckteer_adv_v2','rckteer_adv_v2'], 'Soldier', '2', 'Cownaetion', 'https://tempus2.xyz/maps/rj_rckteer_adv_v2'),
     new Map(['rj_training_v3','rj_training','training'], 'Soldier', '3', 'Cownaetion', 'https://tempus2.xyz/maps/rj_training_v3'),
     new Map(['sj_naissancee_tf2','sj_naissancee','naissancee'], 'Demo', '2', 'Cownaetion', 'https://tempus2.xyz/maps/sj_naissancee_tf2'),
-    new Map(['sj_providence_tf','sj_providence','providence'], 'Demo', '5', 'Hellbent', 'https://tempus2.xyz/maps/sj_providence_tf')
+    new Map(['sj_providence_tf','sj_providence','providence'], 'Demo', '5', 'False_', 'https://tempus2.xyz/maps/sj_providence_tf')
 ];
