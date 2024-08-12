@@ -76,6 +76,12 @@ nav li {
 	cursor: pointer;
 }
 
+#contribute {
+	padding-left: 24px;
+	width: fit-content;
+	cursor: pointer;
+}
+
 #kofi {
 	float: right;
 	height: 50px;
