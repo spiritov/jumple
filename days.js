@@ -3,11 +3,12 @@ var jumple_day_number = 1;
 var total_days_completed = 0;
 var dayDisplays = [];
 var backgroundPreset = '1';
+var averagePreset = '1';
 const backgroundContainerElement = document.getElementById('background_container');
 const backgroundGradientElement = document.getElementById('background_gradient');
 const background_toggle_element = document.getElementById('background_toggle');
-const score_toggle_element = document.getElementById('score_toggle');
-const score_toggle_element_average = document.getElementById('score_toggle_element_average');
+const average_toggle_element = document.getElementById('average_toggle');
+const average_toggle_element_average = document.getElementById('average_toggle_element_average');
 
 fetch('jumple_day_number.txt')
     .then(function (response) {
@@ -239,24 +240,29 @@ background_toggle_element.addEventListener('click', function () {
     } //apply active background and save to localStorage
 });
 
-score_toggle_element.addEventListener('click', function () {
-    let score_elements = document.getElementsByClassName('days_container_average');
-    if (score_toggle_element.className.includes('option_active')) {
-        score_toggle_element.classList.remove('option_active');
+average_toggle_element.addEventListener('click', toggleaverage);
 
-        for (var i = 0; i < score_elements.length; i++) {
-            score_elements[i].classList.remove('active');
+function toggleaverage() {
+    let average_elements = document.getElementsByClassName('days_container_average');
+    if (average_toggle_element.className.includes('option_active')) {
+        average_toggle_element.classList.remove('option_active');
+        localStorage.setItem('average', '0');
+
+        for (var i = 0; i < average_elements.length; i++) {
+            average_elements[i].classList.remove('active');
         }
-        score_toggle_element_average.classList.remove('active');
+        average_toggle_element_average.classList.remove('active');
     }
     else {
-        score_toggle_element.classList.add('option_active');
-        for (var i = 0; i < score_elements.length; i++) {
-            score_elements[i].classList.add('active');
+        average_toggle_element.classList.add('option_active');
+        localStorage.setItem('average', '1');
+
+        for (var i = 0; i < average_elements.length; i++) {
+            average_elements[i].classList.add('active');
         }
-        score_toggle_element_average.classList.add('active');
+        average_toggle_element_average.classList.add('active');
     }
-});
+}
 
 function computeAverage() {
     let starting_day = 1;
@@ -286,18 +292,24 @@ function computeAverage() {
             document.getElementById('days_container_average_' + container_i).innerHTML = average.toFixed(2).replace(/[.,]00$/, '');
         }
     }
-    score_toggle_element_average.innerHTML = total_average.toFixed(2).replace(/[.,]00$/, '');
+    average_toggle_element_average.innerHTML = total_average.toFixed(2).replace(/[.,]00$/, '');
 
     setAverageColors();
+
+    if (localStorage.getItem('average')) //localStorage for averages, must happen after calculations
+        averagePreset = localStorage.getItem('average');
+    if (averagePreset == '0') {
+        toggleaverage();
+    }
 }
 
 function setAverageColors() {
-    let score_elements = document.getElementsByClassName('days_container_average');
-    for (var i = 0; i < score_elements.length; i++) {
-        let modifier = ((+score_elements[i].innerHTML - 1) * 30);
-        score_elements[i].style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
+    let average_elements = document.getElementsByClassName('days_container_average');
+    for (var i = 0; i < average_elements.length; i++) {
+        let modifier = ((+average_elements[i].innerHTML - 1) * 30);
+        average_elements[i].style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
     }
-    let modifier = ((score_toggle_element_average.innerHTML - 1) * 30);
-    score_toggle_element_average.style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
-    score_toggle_element_average.innerHTML +=  ' (' + total_days_completed + ' days)';
+    let modifier = ((average_toggle_element_average.innerHTML - 1) * 30);
+    average_toggle_element_average.style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
+    average_toggle_element_average.innerHTML +=  ' (' + total_days_completed + ' days)';
 }

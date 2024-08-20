@@ -367,11 +367,11 @@ nav li {
 	margin-top: 10px;
 }
 
-#score_toggle {
+#average_toggle {
 	margin-top: 60px;
 }
 
-#score_toggle_element_average {
+#average_toggle_element_average {
 	font-family: "Consolas", "Monaco", monospace;
 	display: none;
 	padding-left: 4px;
@@ -382,7 +382,7 @@ nav li {
 	
 }
 
-#score_toggle_element_average.active {
+#average_toggle_element_average.active {
 	display: inline;
 }
 
