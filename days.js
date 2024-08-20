@@ -1,10 +1,13 @@
 //create as many day buttons as 'jumple_day.txt'
 var jumple_day_number = 1;
+var total_days_completed = 0;
 var dayDisplays = [];
 var backgroundPreset = '1';
 const backgroundContainerElement = document.getElementById('background_container');
 const backgroundGradientElement = document.getElementById('background_gradient');
 const background_toggle_element = document.getElementById('background_toggle');
+const score_toggle_element = document.getElementById('score_toggle');
+const score_toggle_element_average = document.getElementById('score_toggle_element_average');
 
 fetch('jumple_day_number.txt')
     .then(function (response) {
@@ -13,6 +16,7 @@ fetch('jumple_day_number.txt')
     .then(function (text) {
         displayDaysList(parseInt(text));
         jumple_day_number = parseInt(text);
+        computeAverage();
     });
 
 var allDaysElement = document.getElementById('all_days');
@@ -38,6 +42,12 @@ function addContainer(i) {
     days_container_toggle.innerHTML = 'Days ' + i + '-' + (i + 29);
     days_container_toggle.style.opacity = '1';
     allDaysElement.appendChild(days_container_toggle);
+
+    const days_container_average = document.createElement('div'); //new
+    days_container_average.classList.add('days_container_average');
+    days_container_average.classList.add('active');
+    days_container_average.id = 'days_container_average_' + activeAppendContainerID;
+    days_container_toggle.appendChild(days_container_average);
 
     const container = document.createElement('div');
     container.id = 'container_' + activeAppendContainerID;
@@ -111,22 +121,22 @@ function setDisplay(day) {
 //overwrite day 65 & 140 errors, remove later
 function fixDays() {
     const eightHistory = JSON.parse(localStorage.getItem('day' + 65 + '_history'));
-    const eightNames = mapList[rngList[65-1]-1].name;
+    const eightNames = mapList[rngList[65 - 1] - 1].name;
     const droughtHistory = JSON.parse(localStorage.getItem('day' + 140 + '_history'));
-    const droughtNames = mapList[rngList[140-1]-1].name;
+    const droughtNames = mapList[rngList[140 - 1] - 1].name;
     let temp_results_tracker = '';
     let solved = false;
 
     //day 65 (eight)
-    for(let i = 0; i < eightHistory.length; i++) {
-        for(let j = 0; j < eightNames.length; j++) {
-            if(eightHistory[i] == eightNames[j] && !solved) {
-                    solved = true;
-                    temp_results_tracker += '1';
-                    localStorage.setItem('day' + 65 + '_result', temp_results_tracker);
-                }
+    for (let i = 0; i < eightHistory.length; i++) {
+        for (let j = 0; j < eightNames.length; j++) {
+            if (eightHistory[i] == eightNames[j] && !solved) {
+                solved = true;
+                temp_results_tracker += '1';
+                localStorage.setItem('day' + 65 + '_result', temp_results_tracker);
+            }
         }
-        if(!solved){
+        if (!solved) {
             temp_results_tracker += '0';
         }
     }
@@ -136,15 +146,15 @@ function fixDays() {
     solved = false;
 
     //day 140 (drought)
-    for(let i = 0; i < droughtHistory.length; i++) {
-        for(let j = 0; j < droughtNames.length; j++) {
-            if(droughtHistory[i] == droughtNames[j] && !solved) {
-                    solved = true;
-                    temp_results_tracker += '1';
-                    localStorage.setItem('day' + 140 + '_result', temp_results_tracker);
-                }
+    for (let i = 0; i < droughtHistory.length; i++) {
+        for (let j = 0; j < droughtNames.length; j++) {
+            if (droughtHistory[i] == droughtNames[j] && !solved) {
+                solved = true;
+                temp_results_tracker += '1';
+                localStorage.setItem('day' + 140 + '_result', temp_results_tracker);
+            }
         }
-        if(!solved){
+        if (!solved) {
             temp_results_tracker += '0';
         }
     }
@@ -152,7 +162,7 @@ function fixDays() {
 }
 const eightResult = localStorage.getItem('day' + 65 + '_result');
 const droughtResult = localStorage.getItem('day' + 140 + '_result');
-if(eightResult[0] == '0' || droughtResult[0] == '0') {
+if (eightResult[0] == '0' || droughtResult[0] == '0') {
     fixDays();
 }
 
@@ -201,7 +211,7 @@ function setBackground(id) {
         document.body.style.backgroundColor = 'slategrey';
         backgroundContainerElement.classList.remove('enabled');
         backgroundGradientElement.classList.remove('enabled');
-        
+
     }
 }
 
@@ -228,3 +238,66 @@ background_toggle_element.addEventListener('click', function () {
         localStorage.setItem('background', '1');
     } //apply active background and save to localStorage
 });
+
+score_toggle_element.addEventListener('click', function () {
+    let score_elements = document.getElementsByClassName('days_container_average');
+    if (score_toggle_element.className.includes('option_active')) {
+        score_toggle_element.classList.remove('option_active');
+
+        for (var i = 0; i < score_elements.length; i++) {
+            score_elements[i].classList.remove('active');
+        }
+        score_toggle_element_average.classList.remove('active');
+    }
+    else {
+        score_toggle_element.classList.add('option_active');
+        for (var i = 0; i < score_elements.length; i++) {
+            score_elements[i].classList.add('active');
+        }
+        score_toggle_element_average.classList.add('active');
+    }
+});
+
+function computeAverage() {
+    let starting_day = 1;
+    let container_i = 0;
+    let total_average = 0;
+    let total_total = 0;
+    while (starting_day < jumple_day_number) {
+        let group_days_completed = 0;
+        let total = 0;
+        let average = 0;
+        for (i = starting_day; i < starting_day + 30; i++) {
+            if (localStorage.getItem('day' + i + '_result') && localStorage.getItem('day' + i + '_history')) {
+                group_days_completed++;
+                total_days_completed++;
+                let result_guesses = (localStorage.getItem('day' + i + '_result')).length;
+                total += result_guesses;
+                total_total += result_guesses;
+            }
+
+        }
+
+        starting_day += 30;
+        container_i++;
+        average = total / group_days_completed;
+        total_average = total_total / total_days_completed;
+        if (group_days_completed > 0) {
+            document.getElementById('days_container_average_' + container_i).innerHTML = average.toFixed(2).replace(/[.,]00$/, '');
+        }
+    }
+    score_toggle_element_average.innerHTML = total_average.toFixed(2).replace(/[.,]00$/, '');
+
+    setAverageColors();
+}
+
+function setAverageColors() {
+    let score_elements = document.getElementsByClassName('days_container_average');
+    for (var i = 0; i < score_elements.length; i++) {
+        let modifier = ((+score_elements[i].innerHTML - 1) * 30);
+        score_elements[i].style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
+    }
+    let modifier = ((score_toggle_element_average.innerHTML - 1) * 30);
+    score_toggle_element_average.style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
+    score_toggle_element_average.innerHTML +=  ' (' + total_days_completed + ' days)';
+}

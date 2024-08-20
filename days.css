@@ -155,11 +155,28 @@ nav li {
 	padding-top: 1px;
 }
 
+.days_container_average {
+	font-family: "Consolas", "Monaco", monospace;
+	display: none;
+	line-height: 18px;
+	border-radius: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	position: absolute;
+	text-align: end;
+	top: 11px;
+	right: 10px;
+}
+
+.days_container_average.active {
+	display: inline-block;
+}
+
 .days_container_toggle {
 	margin: auto;
 	margin-bottom: -2px;
 	margin-top: 10px;
-	width: 200px;
+	width: 220px;
 	line-height: 40px;
 	border-radius: 10px;
 	background-color: lavender;
@@ -212,7 +229,7 @@ nav li {
 	text-align: right;
 	width: 180px;
 	padding-right: 16px;
-	border: 3px solid black;
+	border: 2px solid #C9C9FF;
 	border-radius: 10px;
 	background-color: lavender;
 	margin: 3px;
@@ -338,7 +355,6 @@ nav li {
 	font-family: "Consolas", "Monaco", monospace;
 	user-select: none;
 	cursor: pointer;
-
 	padding: 10px;
 	background-color: darkgray;
 	border: 2px dashed gray;
@@ -351,8 +367,27 @@ nav li {
 	margin-top: 10px;
 }
 
-#background_toggle {
+#score_toggle {
 	margin-top: 60px;
+}
+
+#score_toggle_element_average {
+	font-family: "Consolas", "Monaco", monospace;
+	display: none;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 2px;
+	line-height: 18px;
+	border-radius: 4px;
+	
+}
+
+#score_toggle_element_average.active {
+	display: inline;
+}
+
+#background_toggle {
+	margin-top: 110px;
 }
 
 .option_active
