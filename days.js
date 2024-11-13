@@ -1,6 +1,7 @@
 //create as many day buttons as 'jumple_day.txt'
 var jumple_day_number = 1;
 var total_days_completed = 0;
+var total_average = 0;
 var dayDisplays = [];
 var backgroundPreset = '1';
 var averagePreset = '1';
@@ -9,6 +10,8 @@ const backgroundGradientElement = document.getElementById('background_gradient')
 const background_toggle_element = document.getElementById('background_toggle');
 const average_toggle_element = document.getElementById('average_toggle');
 const average_toggle_element_average = document.getElementById('average_toggle_element_average');
+const export_results_element = document.getElementById('export_results');
+let allowExport = true;
 
 fetch('jumple_day_number.txt')
     .then(function (response) {
@@ -27,7 +30,7 @@ function displayDaysList(days) {
     allDaysElement = document.getElementById('all_days');
     activeAppendContainerID = 0;
     for (let i = 1; i <= days; i++) {
-        if (i % 30 === 1) {
+        if (i % 30 === 1 && i < 332) { //dont add another container after day 330
             addContainer(i);
         }
         setDisplay(i);
@@ -40,7 +43,12 @@ function addContainer(i) {
     const days_container_toggle = document.createElement('div');
     days_container_toggle.id = 'container_toggle_' + activeAppendContainerID;
     days_container_toggle.classList.add('days_container_toggle');
-    days_container_toggle.innerHTML = 'Days ' + i + '-' + (i + 29);
+    if (i < 330) { //make last container 5 days larger for 365
+        days_container_toggle.innerHTML = 'Days ' + i + '-' + (i + 29);
+    }
+    else {
+        days_container_toggle.innerHTML = 'Days ' + i + '-' + (i + 34);
+    }
     days_container_toggle.style.opacity = '1';
     allDaysElement.appendChild(days_container_toggle);
 
@@ -61,7 +69,7 @@ function addContainer(i) {
     });
 }
 
-function toggleContainer(id) {
+function toggleContainer() {
     document.getElementById('container_toggle_' + activeAppendContainerID).classList.toggle('active');
     document.getElementById('container_' + activeAppendContainerID).classList.toggle('active');
 }
@@ -82,8 +90,7 @@ function setDisplay(day) {
 
     if (localStorage.getItem('day' + day + '_result') && localStorage.getItem('day' + day + '_history')) //history check needed since both are created at the same time
     {
-        results = (localStorage.getItem('day' + day + '_result'));
-
+        let results = (localStorage.getItem('day' + day + '_result'));
         let dayCompleted = false;
         if (results.length === 5) {
             dayCompleted = true;
@@ -161,6 +168,7 @@ function fixDays() {
     }
 
 }
+
 const eightResult = localStorage.getItem('day' + 65 + '_result');
 const droughtResult = localStorage.getItem('day' + 140 + '_result');
 if (eightResult[0] == '0' || droughtResult[0] == '0') {
@@ -267,7 +275,7 @@ function toggleaverage() {
 function computeAverage() {
     let starting_day = 1;
     let container_i = 0;
-    let total_average = 0;
+    total_average = 0;
     let total_total = 0;
     while (starting_day < jumple_day_number) {
         let group_days_completed = 0;
@@ -311,5 +319,56 @@ function setAverageColors() {
     }
     let modifier = ((average_toggle_element_average.innerHTML - 1) * 30);
     average_toggle_element_average.style.background = 'hsl(' + (130 - modifier) + 'deg 75% 75%)';
-    average_toggle_element_average.innerHTML +=  ' (' + total_days_completed + ' days)';
+    average_toggle_element_average.innerHTML += ' (' + total_days_completed + ' days)';
 }
+
+
+function getResultsString(results) {
+}
+
+function exportResults() {
+    const days_container_toggle = document.createElement('div');
+    days_container_toggle.innerHTML = 'all results';
+    days_container_toggle.classList.add('days_container_toggle');
+    days_container_toggle.style.opacity = '1';
+    allDaysElement.prepend(days_container_toggle);
+
+    const container = document.createElement('div');
+    container.classList.add('days_container');
+    container.style.textAlign = 'left';
+    days_container_toggle.after(container);
+
+    days_container_toggle.addEventListener('click', function () {
+        days_container_toggle.classList.toggle('active');
+        container.classList.toggle('active');
+    });
+
+    container.innerHTML += `average over ${total_days_completed} days: ${total_average.toFixed(2).replace(/[.,]00$/, '')} <br>`;
+
+    for (let i = 1; i <= jumple_day_number; i++) {
+        if (localStorage.getItem('day' + i + '_result') && localStorage.getItem('day' + i + '_history')) //history check needed since both are created at the same time
+        {
+            let results = (localStorage.getItem('day' + i + '_result'));
+            container.innerHTML += `🚀 Jumple Day ${i} `;
+            for (let i = 0; i < 5; i++) //emoji display
+            {
+                if (i < results.length) {
+                    if (results[i] === '1') {
+                        container.innerHTML += '🟩';
+                    }
+                    else {
+                        container.innerHTML += '🟥';
+                    }
+                }
+            }
+            container.innerHTML += '<br>';
+        }
+    }
+}
+
+export_results_element.addEventListener('click', function () {
+    if (allowExport) {
+        exportResults();
+        allowExport = false;
+    }
+});

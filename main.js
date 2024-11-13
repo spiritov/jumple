@@ -1,6 +1,6 @@
 var day = 1; //arbitrary default
 var currentDay = 1; //default
-var map = mapList[rngList[day-1]-1]; //default
+var map = mapList[rngList[day - 1] - 1]; //default
 //mapList constructor: {name, intended_class, tier, author, link}
 let guesses = 0;
 const max_guesses = 5;
@@ -12,6 +12,7 @@ const mapHintElement = document.getElementById('map_hint');
 const inputElement = document.getElementById('input');
 const submitButtonElement = document.getElementById('submit_button');
 const inputHistoryElement = document.getElementById('input_history');
+const swapWrapperElement = document.getElementById('swap_wrapper');
 var resultsTracker = ''; //populated by localStorage if it exists
 var resultsHistory = []; //populated by localStorage if it exists
 var backgroundPreset = 1;
@@ -36,8 +37,8 @@ if (document.getElementById('index_identifier') === null) //must be day page
         .then(function (text) {
             currentDay = parseInt(text);
             const url = window.location.href;
-            day = parseInt((url.substring(url.lastIndexOf('/') + 1,url.length))); //get day # from url
-            map = mapList[rngList[day-1]-1];
+            day = parseInt((url.substring(url.lastIndexOf('/') + 1, url.length))); //get day # from url
+            map = mapList[rngList[day - 1] - 1];
             if (day <= currentDay && day > 0) {
                 initializeMap();
                 checkLocalStorage();
@@ -53,25 +54,65 @@ if (document.getElementById('index_identifier') === null) //must be day page
 else //index page
 {
     fetch('jumple_day_number.txt?')
-    .then(function(response) {
-        return response.text();
-    })
-    .then(function(text) {
-        day = parseInt(text);
-        map = mapList[rngList[day-1]-1];
-        initializeMap();
-        checkLocalStorage();
-        initializeAutofill();
-    });
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (text) {
+            day = parseInt(text);
+            map = mapList[rngList[day - 1] - 1];
+            initializeMap();
+            checkLocalStorage();
+            initializeAutofill();
+        });
+}
+
+function initializeLeftLink() {
+    const leftLink = document.createElement('a');
+    leftLink.href = day - 1;
+
+    swapLeftElement = document.createElement('div');
+    swapLeftElement.id = 'swap_right';
+    swapLeftElement.className = 'swap_day';
+    swapLeftElement.innerHTML = '<';
+
+    leftLink.appendChild(swapLeftElement);
+    swapWrapperElement.appendChild(leftLink);
+}
+
+function initializeRightLink() {
+    const rightLink = document.createElement('a');
+    rightLink.href = day + 1;
+
+    swapRightElement = document.createElement('div');
+    swapRightElement.id = 'swap_left';
+    swapRightElement.className = 'swap_day';
+    swapRightElement.innerHTML = '>';
+
+    rightLink.appendChild(swapRightElement);
+    swapWrapperElement.appendChild(rightLink);
+}
+
+function initializeSwapDayElements() {
+    if (document.getElementById('index_identifier') != null) { //latest page
+        initializeLeftLink();
+    }
+    else if (day == 1) {
+        initializeRightLink();
+    }
+    else {
+        initializeLeftLink();
+        initializeRightLink();
+    }
 }
 
 //set day specific parts of page
 function initializeMap() {
+    initializeSwapDayElements();
     dayNumberElement.innerHTML = 'Jumple Day ' + day;
     screenshotElement.src = 'assets/maps/' + day + '/1.jpg';
     hintElements[0].classList.add('activeHint');
 
-    screenshotElement.addEventListener('click', function() {
+    screenshotElement.addEventListener('click', function () {
         screenshotContainerElement.classList.toggle('enlarge');
     });
 
@@ -86,10 +127,8 @@ function initializeMap() {
     });
 
     submitButtonElement.addEventListener('click', function () {
-        if (!solved) 
-        {
-            if (inputElement.value.length > 0 && guesses < max_guesses) 
-            {
+        if (!solved) {
+            if (inputElement.value.length > 0 && guesses < max_guesses) {
                 checkInput();
             }
             displayAutofill(); //in autofill.js
@@ -97,7 +136,7 @@ function initializeMap() {
     });
 
     for (let i = 1; i <= max_guesses; i++) {
-        hintElements[i-1].onclick = function () {
+        hintElements[i - 1].onclick = function () {
             show(i);
         }
     }
@@ -108,65 +147,51 @@ function initializeMap() {
 
 }
 
-function initializeAutofill()
-{
+function initializeAutofill() {
     inputElement.addEventListener('keydown', function (pressed) { //active element tracking
-        if(autofillTerms.length > 0)
-        {
-            if(pressed.key === 'Tab')
-            {
+        if (autofillTerms.length > 0) {
+            if (pressed.key === 'Tab') {
                 pressed.preventDefault();
                 fillAutofillWithActiveTerm();
             }
-            else if(pressed.key === 'ArrowUp')
-            {
+            else if (pressed.key === 'ArrowUp') {
                 pressed.preventDefault();
-                if(activeAutofillListID > 0)
-                {
+                if (activeAutofillListID > 0) {
                     setActiveAutofillElement(activeAutofillListID - 1);
                     activeAutofillListElement.scrollIntoView();
                 }
             }
-            else if(pressed.key === 'ArrowDown')
-            {
+            else if (pressed.key === 'ArrowDown') {
                 pressed.preventDefault();
-                if(activeAutofillListID < autofillTerms.length - 1)
-                {
+                if (activeAutofillListID < autofillTerms.length - 1) {
                     setActiveAutofillElement(activeAutofillListID + 1);
                     activeAutofillListElement.scrollIntoView();
                 }
             }
-            
+
         }
     });
-    
+
     inputElement.addEventListener('keyup', function (pressed) {
-        if(autofillTerms.length > 0)
-        {
+        if (autofillTerms.length > 0) {
             pressed.preventDefault();
         }
-        if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown' && inputElement.value.length > 1) 
-        {
+        if (!solved && pressed.key != 'Tab' && pressed.key != 'ArrowUp' && pressed.key != 'ArrowDown' && inputElement.value.length > 1) {
             displayAutofill();
         }
-        if(pressed.key === 'Backspace' && inputElement.value.length < 2)
-        {
+        if (pressed.key === 'Backspace' && inputElement.value.length < 2) {
             setAutofillActive(false);
         }
     });
 
-    inputElement.addEventListener('click', function()
-    {
-        if(inputElement.value.length > 1  && !solved)
-        {
+    inputElement.addEventListener('click', function () {
+        if (inputElement.value.length > 1 && !solved) {
             displayAutofill();
         }
     });
 
-    window.addEventListener('click', function(onClick)
-    {
-        if(onClick.target != autofillElement && onClick.target != inputElement)
-        {
+    window.addEventListener('click', function (onClick) {
+        if (onClick.target != autofillElement && onClick.target != inputElement) {
             setAutofillActive(false);
         }
     });
@@ -196,8 +221,7 @@ function show(hint_number) {
 
 //check input against solutions
 function checkInput() {
-    if (!guesses) 
-    {
+    if (!guesses) {
         inputHistoryElement.classList.add('border');
     }
 
@@ -239,8 +263,7 @@ function skip() {
     }
 }
 
-function formatInput(guess)
-{
+function formatInput(guess) {
     guess = guess.toLowerCase();
     guess = guess.replace(/\s/g, '');
     return guess;
@@ -276,9 +299,9 @@ function checkIfSolved(solved) {
 }
 
 function revealHint(number) {
-    if (hintElements[number-1].className.includes('disabled')) //safeguard to not re-disable
+    if (hintElements[number - 1].className.includes('disabled')) //safeguard to not re-disable
     {
-        hintElements[number-1].classList.toggle('disabled');
+        hintElements[number - 1].classList.toggle('disabled');
     }
 }
 
@@ -335,24 +358,16 @@ function shareResults() {
     };
 }
 
-function getResultsString(results) {
-    results = results.replaceAll('0', '🟥');
-    results = results.replace('1', '🟩');
-    return results;
-}
-
-function setBackground(id)
-{
-    if(id == '1')
-    {
+function setBackground(id) {
+    if (id == '1') {
         document.body.classList.add('dashedBG');
         dayNumberElement.classList.add('dashedBG');
         mapHintElement.classList.add('dashedBG');
+        document.getElementById('game_body').classList.add('dashedBG');
         document.getElementById('background_container').classList.add('enabled');
         document.getElementById('background_gradient').classList.add('enabled');
     }
-    else
-    {
+    else {
         document.body.style.backgroundColor = 'slategrey';
     }
 }
@@ -393,9 +408,11 @@ function checkLocalStorage() {
     }
 }
 
+
+
 //load background
-if(localStorage.getItem('background')) {
-    backgroundPreset =  localStorage.getItem('background');
+if (localStorage.getItem('background')) {
+    backgroundPreset = localStorage.getItem('background');
     setBackground(backgroundPreset);
 }
 else {
