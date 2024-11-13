@@ -648,6 +648,11 @@ nav li:hover {
 	border-radius: 20px;
 	}
 	
+	.hint_text
+	{
+		font-size: 32px;
+	}
+
 	#input {
 	height: 80px;
 	border-radius: 6px;
