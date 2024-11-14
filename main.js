@@ -93,7 +93,7 @@ function initializeRightLink() {
 }
 
 function initializeSwapDayElements() {
-    if (document.getElementById('index_identifier') != null) { //latest page
+    if (document.getElementById('index_identifier') != null || day == currentDay) { //latest page
         initializeLeftLink();
     }
     else if (day == 1) {
