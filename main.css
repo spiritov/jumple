@@ -586,6 +586,7 @@ nav li:hover {
 	width: 100%;
 	margin: 0px auto;
 	overflow: hidden;
+	justify-content: space-between;
 }
 
 .swap_day
@@ -612,7 +613,6 @@ nav li:hover {
 }
 
 #swap_right {
-	margin-left: auto;
 }
 
 /* resize things for mobile */
