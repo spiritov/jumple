@@ -1,6 +1,3 @@
-//TODO
-//little overlay to show hint number
-//add single image maps at bottom ?
 var backgroundPreset = 1;
 var jumple_day_number = 1;
 const showMapsToggleElement = document.getElementById('show_maps_toggle');
