@@ -80,6 +80,21 @@ function initializeLeftLink() {
 }
 
 function initializeRightLink() {
+    //dummy link
+    if (day == 1) {
+        const leftLink = document.createElement('a');
+        leftLink.href = day;
+
+        swapLeftElement = document.createElement('div');
+        swapLeftElement.id = 'swap_right';
+        swapLeftElement.className = 'swap_day';
+        swapLeftElement.classList.add('hidden');
+        swapLeftElement.innerHTML = '<';
+
+        leftLink.appendChild(swapLeftElement);
+        swapWrapperElement.appendChild(leftLink);
+    }
+
     const rightLink = document.createElement('a');
     rightLink.href = day + 1;
 
