@@ -293,7 +293,9 @@ function computeAverage() {
         }
 
         starting_day += 30;
-        container_i++;
+        if (i < 332) {//we dont add another container after day 330
+            container_i++;
+        }
         average = total / group_days_completed;
         total_average = total_total / total_days_completed;
         if (group_days_completed > 0) {

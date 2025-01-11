@@ -338,7 +338,13 @@ function end() {
         document.getElementById('map_link').href = map.link;
         document.getElementById('skip').classList.add('disabled');
         shareResults();
+        if (day == 365) { //jumple end message
+            dayNumberElement.innerHTML = "thank you for playing jumple !";
+            dayNumberElement.style.textDecoration = "lightcoral underline";
+            dayNumberElement.style.fontSize = "24px";
+        }
     }, 500);
+
 }
 
 //should function for both twitter and clipboard
@@ -434,3 +440,10 @@ else {
     localStorage.setItem('background', '1');
     setBackground('1');
 }
+
+/* disabled nav elements after completion of jumple
+<li id="kofi"><a href="https://ko-fi.com/karahara" target="_blank"><img src="assets/site/about.png"
+            draggable="false"></a></li>
+<li id="contribute"><a href="https://forms.gle/XTpfZBZ7Luia2pry8" target="_blank"><img
+            src="assets/site/contribute.png" draggable="false"></a></li> 
+*/
