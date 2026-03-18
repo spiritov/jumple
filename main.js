@@ -1,8 +1,24 @@
+class Map {
+  constructor(name, intended_class, tier, author, link) {
+    this.name = name;
+    this.intended_class = intended_class;
+    this.tier = tier;
+    this.author = author;
+    this.link = link;
+  }
+}
+
 var day = 1; //arbitrary default
 var currentDay = 1; //default
 var map = mapList[rngList[day - 1] - 1]; //default
 if (day === 366) {
-  map = 'jump_byhicrine';
+  map = new Map(
+    ['jump_byhicrine', 'byhicrine'],
+    'Soldier',
+    '4',
+    '',
+    'https://tempus2.xyz/maps/jump_byhicrine',
+  );
 }
 //mapList constructor: {name, intended_class, tier, author, link}
 let guesses = 0;
@@ -43,7 +59,13 @@ if (document.getElementById('index_identifier') === null) //must be day page
       day = parseInt(url.substring(url.lastIndexOf('/') + 1, url.length)); //get day # from url
       map = mapList[rngList[day - 1] - 1];
       if (day === 366) {
-        map = 'jump_byhicrine';
+        map = new Map(
+          ['jump_byhicrine', 'byhicrine'],
+          'Soldier',
+          '4',
+          '',
+          'https://tempus2.xyz/maps/jump_byhicrine',
+        );
       }
       if (day <= currentDay && day > 0) {
         initializeMap();
@@ -65,7 +87,13 @@ if (document.getElementById('index_identifier') === null) //must be day page
       day = parseInt(text);
       map = mapList[rngList[day - 1] - 1];
       if (day === 366) {
-        map = 'jump_byhicrine';
+        map = new Map(
+          ['jump_byhicrine', 'byhicrine'],
+          'Soldier',
+          '4',
+          '',
+          'https://tempus2.xyz/maps/jump_byhicrine',
+        );
       }
       initializeMap();
       checkLocalStorage();
